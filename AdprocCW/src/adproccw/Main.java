@@ -14,6 +14,14 @@ public class Main {
         // TODO code application logic here
         Pipe pipe = new Pipe(1, 10.0, 10.0);
         System.out.println(pipe.price);
+        
+        PipeUI form = new PipeUI();
+        
+        form.setVisible(true);
+        
+        
     }
+    
+    //GIT HUB TEST :D
     
 }
