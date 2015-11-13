@@ -2,31 +2,38 @@
 package adproccw;
 
 /**
- * The basic pipe object
+ * The pipe object
  * 
  * @author James Taylor <up368574@myport.ac.uk>
  */
 public class Pipe {
     
-    int grade;
-    double length; //in meters, volume calculations are in inches;
+    private int pipeGrade;
+    private double pipeLength; //in meters, volume calculations are in inches;
     //1 inch = 0.0254 meters
-    double outerRadius; //in inches
-    double price;
-    boolean insulation;
-    boolean reinforcement;
-    boolean chemicalRes;
+    private double pipeRadius; //in inches
+    private double pipePrice;
+    private boolean pipeInsulation;
+    private boolean pipeReinforcement;
+    private boolean pipeChemicalRes;
     
     /**
+     * Creates a new pipe
      * 
-     * @param newGrade
-     * @param newRadius
-     * @param newLength 
+     * @param grade
+     * @param length
+     * @param radius
+     * @param insulation
+     * @param renforcement
+     * @param chemeicalResist 
      */
-    public Pipe (int newGrade, double newRadius, double newLength){
-        grade = newGrade;
-        outerRadius = newRadius;
-        length = newLength;
+    public Pipe (int grade, double length, double radius, boolean insulation, boolean reinforcement, boolean chemicalResist){
+        pipeGrade = grade;
+        pipeRadius = radius;
+        pipeLength = length;
+        pipeInsulation = insulation;
+        pipeReinforcement = reinforcement;
+        pipeChemicalRes = chemicalResist;
         calcPrice();
     }
     
@@ -34,12 +41,20 @@ public class Pipe {
      * Calculates the price based on the volume and grade of the pipe
      */
     private void calcPrice () {
-        PriceList prices = new PriceList();
-        double innerRadius = outerRadius - outerRadius/10;
-        double pipeArea = (Math.PI * Math.pow(outerRadius, 2.0)) 
+        double[] prices = {0.3, 0.32, 0.35, 0.4, 0.46};
+        double innerRadius = pipeRadius - pipeRadius/10;
+        double pipeArea = (Math.PI * Math.pow(pipeRadius, 2.0)) 
                         - (Math.PI * Math.pow(innerRadius, 2.0));
-        price = pipeArea * length * 0.0254 * prices.getPrice(grade); 
+        pipePrice = pipeArea * pipeLength * 0.0254 * prices[pipeGrade-1]; 
     }
+    
+    /**
+     * @return price
+     */
+    public double getPrice () {
+        return pipePrice;
+    }
+    
     
     
 }
