@@ -2,7 +2,7 @@
  */
 package adproccw;
 
-
+import javax.swing.JOptionPane;
 //import javax.swing.*; //??????????????????????
 
 /**
@@ -27,8 +27,7 @@ public class PipeUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnOrder = new javax.swing.JButton();
-        txtGrade = new javax.swing.JTextField();
+        btnOrder = new javax.swing.JButton();
         txtLength = new javax.swing.JTextField();
         txtRad = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -36,27 +35,26 @@ public class PipeUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblCost = new javax.swing.JLabel();
-        list1 = new java.awt.List();
+        lstOrder = new java.awt.List();
         jLabel5 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         cbxInsulation = new javax.swing.JCheckBox();
         cbxReinforce = new javax.swing.JCheckBox();
         cbxResistant = new javax.swing.JCheckBox();
+        BtnNew = new javax.swing.JButton();
+        cmbGrade = new javax.swing.JComboBox();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BtnOrder.setText("Add to Order");
-        BtnOrder.setName("BtnOrder"); // NOI18N
-        BtnOrder.addActionListener(new java.awt.event.ActionListener() {
+        btnOrder.setText("Add to Order");
+        btnOrder.setName("btnOrder"); // NOI18N
+        btnOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnOrderActionPerformed(evt);
-            }
-        });
-
-        txtGrade.setName("TxtGrade"); // NOI18N
-        txtGrade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGradeActionPerformed(evt);
+                btnOrderActionPerformed(evt);
             }
         });
 
@@ -69,7 +67,7 @@ public class PipeUI extends javax.swing.JFrame {
 
         txtRad.setName("txtRad"); // NOI18N
 
-        jLabel1.setText("Grade");
+        jLabel1.setText("Plastic grade");
 
         jLabel2.setText("Length");
 
@@ -91,52 +89,100 @@ public class PipeUI extends javax.swing.JFrame {
 
         cbxResistant.setText("ChemicalResist");
 
+        BtnNew.setText("New Order");
+        BtnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNewActionPerformed(evt);
+            }
+        });
+
+        cmbGrade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
+        cmbGrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbGradeActionPerformed(evt);
+            }
+        });
+
+        jRadioButton2.setText("Two");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton3.setText("One");
+
+        jCheckBox1.setText("Colour");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel6.setText("PipesR’us");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6))
+                    .addComponent(lstOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(list1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 373, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCost))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblTotal))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BtnOrder)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtGrade)
-                                            .addComponent(txtLength)
-                                            .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(cbxInsulation)
-                                    .addComponent(cbxResistant)
-                                    .addComponent(cbxReinforce))
-                                .addGap(46, 46, 46)))))
+                .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblTotal)
                 .addGap(49, 49, 49))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cbxInsulation)
+                        .addComponent(cbxResistant)
+                        .addComponent(cbxReinforce)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblCost)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtLength)
+                                    .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jRadioButton3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButton2)))
+                                .addGap(2, 2, 2)))
+                        .addGap(2, 2, 2))
+                    .addComponent(btnOrder))
+                .addGap(256, 256, 256))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1)
+                    .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -144,31 +190,38 @@ public class PipeUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbxInsulation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxReinforce)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxResistant)
-                .addGap(8, 8, 8)
-                .addComponent(BtnOrder)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblCost))
-                .addGap(2, 2, 2)
-                .addComponent(list1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCost)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(btnOrder)
+                .addGap(26, 26, 26)
+                .addComponent(lstOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(lblTotal))
+                    .addComponent(lblTotal)
+                    .addComponent(BtnNew))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrderActionPerformed
+    private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
         
         //set varibles 
@@ -180,10 +233,11 @@ public class PipeUI extends javax.swing.JFrame {
         String lstEntry;
         
          
-        
+        try {
+
         
         //convert to correct type from string
-        newGrade = Integer.parseInt(txtGrade.getText()); 
+        newGrade = 1; //cmbGrade.getSelectedItem(); 
         newRadius = Integer.parseInt(txtLength.getText()); 
         newLength = Double.parseDouble(txtRad.getText());
         
@@ -193,7 +247,6 @@ public class PipeUI extends javax.swing.JFrame {
         reinforcement = cbxReinforce.isSelected();
         chemicalResist = cbxResistant.isSelected();
         
-        System.out.println("test " + insulation + reinforcement + chemicalResist); //TEST
         
         //creates new object
         Pipe aPipe = new Pipe(newGrade, newLength, newRadius, insulation, 
@@ -216,19 +269,52 @@ public class PipeUI extends javax.swing.JFrame {
         lstEntry = ("Pipe grade: " + newGrade + " Radius: " + newRadius +
                 " Lenght: " + newLength + " Cost: " + cost);
         
-        list1.add(lstEntry); // adds to list
+        lstOrder.add(lstEntry); // adds to list
+        clear();
         
         
-    }//GEN-LAST:event_BtnOrderActionPerformed
-
-    private void txtGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGradeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGradeActionPerformed
+    } catch (Exception exRef) {
+                    // catch block, or exception handler, could have more than one handler
+                    JOptionPane.showMessageDialog(null, exRef);
+ }
+    
+    }//GEN-LAST:event_btnOrderActionPerformed
 
     private void txtLengthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLengthActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLengthActionPerformed
 
+    private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
+        // TODO add your handling code here:
+         clear();
+         lstOrder.clear(); //???
+        
+        lblCost.setText("");
+        lblTotal.setText("");
+       
+    }//GEN-LAST:event_BtnNewActionPerformed
+
+    private void cmbGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGradeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbGradeActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void clear()
+    {
+        //cmbGrade.setSelectedItem(1);  
+        txtLength.setText(""); 
+        txtRad.setText("");
+        
+        
+        cbxInsulation.setSelected(false);
+        cbxReinforce.setSelected(false);
+        cbxResistant.setSelected(false);
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -265,19 +351,24 @@ public class PipeUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnOrder;
+    private javax.swing.JButton BtnNew;
+    private javax.swing.JButton btnOrder;
     private javax.swing.JCheckBox cbxInsulation;
     private javax.swing.JCheckBox cbxReinforce;
     private javax.swing.JCheckBox cbxResistant;
+    private javax.swing.JComboBox cmbGrade;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblTotal;
-    private java.awt.List list1;
-    private javax.swing.JTextField txtGrade;
+    private java.awt.List lstOrder;
     private javax.swing.JTextField txtLength;
     private javax.swing.JTextField txtRad;
     // End of variables declaration//GEN-END:variables
