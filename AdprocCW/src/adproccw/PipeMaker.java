@@ -18,11 +18,10 @@ public class PipeMaker {
      * @param length
      * @param radius
      * @param grade
-     * @param colour
      * @param chemicalResist
      * @return Specified pipe type
      */
-    public Pipe makePipe(int type, double length, double radius, int grade, int colour, boolean chemicalResist) {
+    public Pipe makePipe(int type, double length, double radius, int grade, boolean chemicalResist) {
         Pipe retPipe = null;
         switch (type){
             case 1: retPipe = new Pipe1(length, radius, grade, chemicalResist);
