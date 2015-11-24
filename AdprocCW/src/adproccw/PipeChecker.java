@@ -12,9 +12,7 @@ public class PipeChecker {
     /**
      * Can be used to validate pipes
      */
-    public PipeChecker() {
-        
-    }
+    public PipeChecker() {}
     
     /**
      * 
@@ -24,17 +22,15 @@ public class PipeChecker {
      * @param colours
      * @param insulation
      * @param reinforcement
-     * @return Pipe if valid, null if not valid
+     * @return Int with pipe type, 0 if not valid
      */
-    public int check(double length, double radius, int grade, int colours, 
+    public int check(int grade, int colours, 
             boolean insulation, boolean reinforcement) {
-        if (!checkMeasures(length, radius))
-            return 0;
         int type = checkTypes(grade, colours, insulation, reinforcement);
         return type;
     }
     
-    
+    /*
     private boolean checkMeasures(double length, double radius) {
         if (length < 0.1 || length > 6.0)
             return false;
@@ -43,6 +39,7 @@ public class PipeChecker {
         else
             return true;
     }
+    */
     
 
     private int checkTypes(int grade, int colours, boolean insulation, boolean reinforcement) {
