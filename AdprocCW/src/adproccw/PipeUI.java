@@ -88,16 +88,16 @@ public class PipeUI extends javax.swing.JFrame {
 
         jLabel2.setText("Length (m):");
 
-        jLabel3.setText("Radius (Inch)");
+        jLabel3.setText("Radius (Inch):");
 
         jLabel4.setText("Cost: £");
 
-        lblCost.setText("0000.00");
+        lblCost.setText("0");
         lblCost.setName("lblCost"); // NOI18N
 
         jLabel5.setText("Total: £");
 
-        lblTotal.setText("0000.00");
+        lblTotal.setText("0");
         lblTotal.setName("lblCost"); // NOI18N
 
         cbxInsulation.setText("Insulation");
@@ -156,16 +156,9 @@ public class PipeUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lstOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel9))))
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(BtnTables)
                         .addGap(88, 88, 88)
@@ -198,7 +191,7 @@ public class PipeUI extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(rdbTwo)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(200, 200, 200)
@@ -228,10 +221,14 @@ public class PipeUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblTotal)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(372, 372, 372)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(372, 372, 372))))
+                    .addComponent(lstOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -348,9 +345,9 @@ public class PipeUI extends javax.swing.JFrame {
         lstOrder.removeAll(); 
         lstOrderedPipes.clear();
          
-        //clears lables
-        lblCost.setText("");
-        lblTotal.setText("");
+        //resets lables
+        lblCost.setText("0");
+        lblTotal.setText("0");
        
     }//GEN-LAST:event_BtnNewActionPerformed
 
@@ -426,8 +423,8 @@ public class PipeUI extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnTablesActionPerformed
 
     private void clearText()
-    {
-        //cmbGrade.setSelectedItem(1);  
+    { 
+        cmbGrade.setSelectedIndex(0);
         txtLength.setText(""); 
         txtRad.setText("");
         txtQuantity.setText("");
@@ -459,7 +456,8 @@ public class PipeUI extends javax.swing.JFrame {
     {
     
      //convert to correct type from string
-        newGrade = 1; //(Integer) cmbGrade.getSelectedItem(); 
+        newGrade = cmbGrade.getSelectedIndex() + 1; //  cmbGrade.getSelectedItem(); 
+         
         
         newRadius = Double.parseDouble(txtRad.getText()); 
         newLength = Double.parseDouble(txtLength.getText()); 
