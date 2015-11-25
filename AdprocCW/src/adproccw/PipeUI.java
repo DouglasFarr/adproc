@@ -13,8 +13,11 @@ import java.util.ArrayList;
 public class PipeUI extends javax.swing.JFrame {
 
     
-    private  ArrayList<Double> listCost = new ArrayList<Double>();
-    private double total;
+    private  ArrayList<Pipe> lstOrderedPipes = new ArrayList<Pipe>(); 
+    private double total, cost, newLength, newRadius;
+    private int newGrade, type, colour, quantity;  
+    private  boolean insulation, reinforcement, chemicalResist;
+    private Pipe aPipe;
     /**
      * Creates new form PipeUI
      */
@@ -59,6 +62,9 @@ public class PipeUI extends javax.swing.JFrame {
         rdbNone = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         btnRemove = new javax.swing.JButton();
+        txtQuantity = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        BtnEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,22 +150,32 @@ public class PipeUI extends javax.swing.JFrame {
             }
         });
 
+        txtQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuantityActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Quantity:");
+
+        BtnEdit.setText("Edit");
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6))
-                    .addComponent(lstOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRemove)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -171,11 +187,7 @@ public class PipeUI extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(cbxInsulation)
                         .addComponent(cbxResistant)
-                        .addComponent(cbxReinforce)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCost)))
+                        .addComponent(cbxReinforce))
                     .addComponent(btnOrder)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,6 +217,24 @@ public class PipeUI extends javax.swing.JFrame {
                                     .addGap(2, 2, 2))))
                         .addGap(2, 2, 2)))
                 .addGap(256, 256, 256))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6))
+                    .addComponent(lstOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel8)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(191, 191, 191)
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblCost))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,9 +268,13 @@ public class PipeUI extends javax.swing.JFrame {
                 .addComponent(cbxResistant)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCost)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOrder)
                 .addGap(26, 26, 26)
                 .addComponent(lstOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,7 +283,8 @@ public class PipeUI extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(lblTotal)
                     .addComponent(BtnNew)
-                    .addComponent(btnRemove))
+                    .addComponent(btnRemove)
+                    .addComponent(BtnEdit))
                 .addContainerGap())
         );
 
@@ -257,83 +292,44 @@ public class PipeUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
-        // TODO add your handling code here:
-        
-        //set varibles 
-        double cost;
-        int newGrade;
-        int newRadius;
-        int type;
-        int colour;
-        double newLength;
-        String lstEntry;
-        
-         
-        try {
+             
+       // try {
 
         
-        //convert to correct type from string
-        newGrade = 1; //(Integer) cmbGrade.getSelectedItem(); 
-        
-         
-        newRadius = Integer.parseInt(txtLength.getText()); 
-        newLength = Double.parseDouble(txtRad.getText());
-        
-        if (rdbNone.isSelected())
-        { colour = 0;
-        
-        }else if (rdbOne.isSelected())
-        {
-        colour = 1;
-        }
-        else
-        {
-        colour = 2;
-        }
-        
-        
-        
-        boolean insulation, reinforcement, chemicalResist;
-        //get check box values
-        insulation = cbxInsulation.isSelected();
-        reinforcement = cbxReinforce.isSelected();
-        chemicalResist = cbxResistant.isSelected();
-        
-        
+        getInputs();
+ 
         //creates new object
         //Pipe testPipe = new Pipe(newLength, newRadius, newGrade, 1, insulation, 
         //      reinforcement, chemicalResist);
-       
-        
         
         PipeChecker cPipe = new PipeChecker();
         
-        
         type = cPipe.check(newGrade, colour, insulation, reinforcement);
 
+        
         switch (type) {
             case 0:  
+                    aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
                      break;
-            case 1:  Pipe1 aPipe1 =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
+                    //JOptionPane.showMessageDialog(null, "Pipe not supplied");
+                    //return;
+            case 1:   aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
                      break;
-            case 2:  Pipe2 aPipe2 =  new Pipe2(newLength, newRadius, newGrade, chemicalResist);
+            case 2:   aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
                      break;
-            case 3:  Pipe3 aPipe3 =  new Pipe3(newLength, newRadius, newGrade, chemicalResist);
+            case 3:   aPipe = new Pipe3(newLength, newRadius, newGrade, chemicalResist);
                      break;
-            case 4:  Pipe4 aPipe4 =  new Pipe4(newLength, newRadius, newGrade, chemicalResist);
+            case 4:   aPipe = new Pipe4(newLength, newRadius, newGrade, chemicalResist);
                      break;
-            case 5:  Pipe5 aPipe5 =  new Pipe5(newLength, newRadius, newGrade, chemicalResist);
+            case 5:   aPipe = new Pipe5(newLength, newRadius, newGrade, chemicalResist);
                      break;
         }
         
-        //work out total then puts to sting for lable
         
         //cost = aPipe.getPrice();  // need to round, worth doing in function?
+         
+        cost = 10 * quantity;
         
-        cost = 10;
-        
-        //sets cost lable
-        //lblCost.setText(String.valueOf(aPipe.getPrice)); ??????????????
         //sets lable
         lblCost.setText(String.valueOf(cost));
    
@@ -345,22 +341,24 @@ public class PipeUI extends javax.swing.JFrame {
    
     if (response == JOptionPane.YES_OPTION) {
       
-        listCost.add(cost);
+        lstOrderedPipes.add(aPipe);
         
         updateTotal();
-        
+       
+        String lstEntry;
         // list item
         lstEntry = ("Pipe grade: " + newGrade + " Radius: " + newRadius +
-                " Lenght: " + newLength + " Cost: " + cost);
+                " Lenght: " + newLength + " Cost: £" + cost + " x (" + quantity + ")");
         
         lstOrder.add(lstEntry); // adds to list
+        
         clearText();
     }  
         
-    } catch (Exception exRef) {
+    //} catch (Exception exRef) {
                     // catch block, or exception handler, could have more than one handler
-                    JOptionPane.showMessageDialog(null, exRef);
- }
+    //                JOptionPane.showMessageDialog(null, exRef);
+ //}
     
     }//GEN-LAST:event_btnOrderActionPerformed
 
@@ -373,7 +371,7 @@ public class PipeUI extends javax.swing.JFrame {
          clearText();
          lstOrder.clear(); //???
         
-         listCost.clear();
+       lstOrderedPipes.clear();
          
         lblCost.setText("");
         lblTotal.setText("");
@@ -397,34 +395,108 @@ public class PipeUI extends javax.swing.JFrame {
         int index = lstOrder.getSelectedIndex();
         lstOrder.remove(index);
         
-        listCost.remove(index);
+        lstOrderedPipes.remove(index);
         
         updateTotal();
         
     }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantityActionPerformed
+
+    private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+                
+        int index = lstOrder.getSelectedIndex();
+        Pipe xPipe = lstOrderedPipes.get(index);
+        
+        System.out.println(xPipe.getPipeLength());
+        
+        txtLength.setText(Double.toString(xPipe.getPipeLength()));
+        txtRad.setText(Double.toString(xPipe.getPipeRadius()));
+        
+        //getPipeGrade()
+        
+        if (xPipe.getPipeColours()==0)
+        {
+        rdbNone.setSelected(true);
+        }else if (xPipe.getPipeColours()==1)
+        {
+        rdbOne.setSelected(true);
+        }
+        else
+        {
+        rdbTwo.setSelected(true);
+        }
+        
+    cbxInsulation.setSelected(xPipe.isPipeInsulation());
+    cbxReinforce.setSelected(xPipe.isPipeReinforcement());
+    cbxResistant.setSelected(xPipe.isPipeChemicalRes());
+        
+   // btnRemove.doClick();
+        
+        
+        //quantity = Integer.parseInt(txtQuantity.getText()); 
+        
+        
+        
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void clearText()
     {
         //cmbGrade.setSelectedItem(1);  
         txtLength.setText(""); 
         txtRad.setText("");
-        
+        txtQuantity.setText("");
         
         cbxInsulation.setSelected(false);
         cbxReinforce.setSelected(false);
         cbxResistant.setSelected(false);
+        
+        rdbNone.setSelected(true);
     }
     
     private void updateTotal()
     {
         total = 0;
         
-        for(double i: listCost)
+        for(Pipe aPipe:  lstOrderedPipes)
         { 
-           total += i;
+           total += 10; //aPipe.getPrice();
                 }
  
         lblTotal.setText(String.valueOf(total));
+    }
+    
+    private void getInputs()
+    {
+    
+     //convert to correct type from string
+        newGrade = 1; //(Integer) cmbGrade.getSelectedItem(); 
+        
+        
+        newRadius = Integer.parseInt(txtLength.getText()); 
+        newLength = Double.parseDouble(txtRad.getText());
+        
+        if (rdbNone.isSelected())
+        { colour = 0;
+        
+        }else if (rdbOne.isSelected())
+        {
+        colour = 1;
+        }
+        else
+        {
+        colour = 2;
+        }
+        
+        //get check box values
+        insulation = cbxInsulation.isSelected();
+        reinforcement = cbxReinforce.isSelected();
+        chemicalResist = cbxResistant.isSelected();
+        
+        quantity = Integer.parseInt(txtQuantity.getText()); 
+        
     }
     
     /**
@@ -463,6 +535,7 @@ public class PipeUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnEdit;
     private javax.swing.JButton BtnNew;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnRemove;
@@ -477,6 +550,7 @@ public class PipeUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblTotal;
     private java.awt.List lstOrder;
@@ -484,6 +558,8 @@ public class PipeUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdbOne;
     private javax.swing.JRadioButton rdbTwo;
     private javax.swing.JTextField txtLength;
+    private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtRad;
     // End of variables declaration//GEN-END:variables
+
 }

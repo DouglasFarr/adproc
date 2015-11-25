@@ -59,6 +59,34 @@ public abstract class Pipe {
         if (pipeChemicalRes)
             pipePrice += basicPrice * 0.12; 
     }
+
+    public double getPipeLength() {
+        return pipeLength;
+    }
+
+    public double getPipeRadius() {
+        return pipeRadius;
+    }
+
+    public int getPipeGrade() {
+        return pipeGrade;
+    }
+
+    public int getPipeColours() {
+        return pipeColours;
+    }
+
+    public boolean isPipeInsulation() {
+        return pipeInsulation;
+    }
+
+    public boolean isPipeReinforcement() {
+        return pipeReinforcement;
+    }
+
+    public boolean isPipeChemicalRes() {
+        return pipeChemicalRes;
+    }
     
     /**
      * @return price
