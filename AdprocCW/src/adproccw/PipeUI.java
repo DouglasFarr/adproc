@@ -26,9 +26,9 @@ public class PipeUI extends javax.swing.JFrame {
      * Creates new form PipeUI
      */
     public PipeUI() {
+        
         initComponents();
         groupRadioButtons();
-       
         
         }
     
@@ -81,11 +81,6 @@ public class PipeUI extends javax.swing.JFrame {
         });
 
         txtLength.setName("txtLength"); // NOI18N
-        txtLength.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLengthActionPerformed(evt);
-            }
-        });
 
         txtRad.setName("txtRad"); // NOI18N
 
@@ -119,25 +114,10 @@ public class PipeUI extends javax.swing.JFrame {
         });
 
         cmbGrade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
-        cmbGrade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbGradeActionPerformed(evt);
-            }
-        });
 
         rdbTwo.setText("Two");
-        rdbTwo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdbTwoActionPerformed(evt);
-            }
-        });
 
         rdbOne.setText("One");
-        rdbOne.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdbOneActionPerformed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel6.setText("Pipes'Я’us");
@@ -151,12 +131,6 @@ public class PipeUI extends javax.swing.JFrame {
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoveActionPerformed(evt);
-            }
-        });
-
-        txtQuantity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuantityActionPerformed(evt);
             }
         });
 
@@ -326,28 +300,26 @@ public class PipeUI extends javax.swing.JFrame {
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
      
     try {
-      	getInputs();
-
-      	//creates new object
-      	//Pipe testPipe = new Pipe(newLength, newRadius, newGrade, 1, insulation, 
-      	//      reinforcement, chemicalResist);
-
+      	
+        getInputs();
+          
+        validateInput(); // empty
+        
+        //needs to be added as a method
       	PipeChecker cPipe = new PipeChecker();
-
       	type = cPipe.check(newGrade, colour, insulation, reinforcement);
 
-
+        //initialize the type pipe  
       	initPipe(type);
 
-
-      	cost = aPipe.getPrice(); // need to round, worth doing in function?
+      	cost = aPipe.getPrice(); // need to round
 
       	cost = 10 * quantity; //Hard coded 10 for testing 
 
-      	//sets lable
+      	//sets lable.... needed? *********************************************************************************************
       	lblCost.setText(String.valueOf(cost));
 
-      	//Yes or no option message box
+      	//Yes or no option message box asked if theyd like to add to order
       	JDialog.setDefaultLookAndFeelDecorated(true);
       	int response = JOptionPane.showConfirmDialog(null, "You require a type " + type + ". This pipe costs £" + cost +
       		". Would you like to add to order?", "Add to order",
@@ -367,39 +339,28 @@ public class PipeUI extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnOrderActionPerformed
 
-    private void txtLengthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLengthActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLengthActionPerformed
-
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
-        // TODO add your handling code here:
-         clearText();
-        lstOrder.removeAll(); //???
         
+        //clears inputs
+        clearText();
+        
+        //empties lists
+        lstOrder.removeAll(); 
         lstOrderedPipes.clear();
          
+        //clears lables
         lblCost.setText("");
         lblTotal.setText("");
        
     }//GEN-LAST:event_BtnNewActionPerformed
 
-    private void cmbGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGradeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbGradeActionPerformed
-
-    private void rdbTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbTwoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdbTwoActionPerformed
-
-    private void rdbOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbOneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdbOneActionPerformed
-
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        // TODO add your handling code here:
+        
+        //gets se;ected item
         int index = lstOrder.getSelectedIndex();
         
-        if(checkList() == true)
+        // if an item is slected remove it 
+        if(validSelected() == true)
         {
         lstOrder.remove(index);
         
@@ -409,15 +370,11 @@ public class PipeUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
-    private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantityActionPerformed
-
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
                 
         int index = lstOrder.getSelectedIndex();
         
-         if(checkList() == true)
+        if(validSelected() == true)
         {
         Pipe xPipe = lstOrderedPipes.get(index);
         
@@ -475,10 +432,12 @@ public class PipeUI extends javax.swing.JFrame {
         txtRad.setText("");
         txtQuantity.setText("");
         
+        //unticks boxes
         cbxInsulation.setSelected(false);
         cbxReinforce.setSelected(false);
         cbxResistant.setSelected(false);
         
+        //sets defualt radio button 
         rdbNone.setSelected(true);
     }
     
@@ -486,11 +445,13 @@ public class PipeUI extends javax.swing.JFrame {
     {
         total = 0;
         
+        //for each pipe in list add the price 
         for(Pipe aPipe:  lstOrderedPipes)
         { 
-           total += 10; //aPipe.getPrice();
-                }
+           total += 10; //aPipe.getPrice(); // Fixed to 10 for test
+        }
  
+        //updates lable
         lblTotal.setText(String.valueOf(total));
     }
     
@@ -521,6 +482,12 @@ public class PipeUI extends javax.swing.JFrame {
         chemicalResist = cbxResistant.isSelected();
         
         quantity = Integer.parseInt(txtQuantity.getText()); 
+        
+    }
+    
+    private void validateInput()
+    {
+        //add validation here
         
     }
     
@@ -562,18 +529,18 @@ public class PipeUI extends javax.swing.JFrame {
     
     }
     
-    private boolean checkList()
+    private boolean validSelected()
     {
      boolean valid = false;
      int index = lstOrder.getSelectedIndex();
      if(index != -1)
         {
            valid = true;
-      }else if(lstOrderedPipes.size() == 0)
+      }else if(lstOrderedPipes.isEmpty())
       {
       msg("You have no items in the list");
       } else {
-     msg("Please select an item");
+      msg("Please select an item");
       }
      
      return valid;
