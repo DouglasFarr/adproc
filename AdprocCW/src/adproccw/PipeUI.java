@@ -4,7 +4,7 @@ package adproccw;
 
 import javax.swing.JOptionPane;
 import javax.swing.JDialog;
-
+import javax.swing.*;
 /**
  *
  * @author Compaq
@@ -16,6 +16,12 @@ public class PipeUI extends javax.swing.JFrame {
      */
     public PipeUI() {
         initComponents();
+        
+    ButtonGroup group = new ButtonGroup();
+    group.add(rdbNone);
+    group.add(rdbOne);
+    group.add(rdbTwo);        
+        
     }
 
     /**
@@ -43,8 +49,8 @@ public class PipeUI extends javax.swing.JFrame {
         cbxResistant = new javax.swing.JCheckBox();
         BtnNew = new javax.swing.JButton();
         cmbGrade = new javax.swing.JComboBox();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        rdbTwo = new javax.swing.JRadioButton();
+        rdbOne = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         rdbNone = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
@@ -104,18 +110,24 @@ public class PipeUI extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton2.setText("Two");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        rdbTwo.setText("Two");
+        rdbTwo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rdbTwoActionPerformed(evt);
             }
         });
 
-        jRadioButton3.setText("One");
+        rdbOne.setText("One");
+        rdbOne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbOneActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel6.setText("PipesR’us");
 
+        rdbNone.setSelected(true);
         rdbNone.setText("None");
 
         jLabel7.setText("Colours:");
@@ -173,9 +185,9 @@ public class PipeUI extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(rdbNone)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jRadioButton3)
+                                    .addComponent(rdbOne)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jRadioButton2)
+                                    .addComponent(rdbTwo)
                                     .addGap(2, 2, 2))))
                         .addGap(2, 2, 2)))
                 .addGap(256, 256, 256))
@@ -201,8 +213,8 @@ public class PipeUI extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton2)
+                    .addComponent(rdbOne)
+                    .addComponent(rdbTwo)
                     .addComponent(rdbNone))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbxInsulation)
@@ -237,6 +249,8 @@ public class PipeUI extends javax.swing.JFrame {
         double cost;
         int newGrade;
         int newRadius;
+        int type;
+        int colour;
         double newLength;
         String lstEntry;
         
@@ -245,9 +259,25 @@ public class PipeUI extends javax.swing.JFrame {
 
         
         //convert to correct type from string
-        newGrade = 1; //cmbGrade.getSelectedItem(); 
+        newGrade = 1; //(Integer) cmbGrade.getSelectedItem(); 
+        
+         
         newRadius = Integer.parseInt(txtLength.getText()); 
         newLength = Double.parseDouble(txtRad.getText());
+        
+        if (rdbNone.isSelected())
+        { colour = 0;
+        
+        }else if (rdbOne.isSelected())
+        {
+        colour = 1;
+        }
+        else
+        {
+        colour = 2;
+        }
+        
+        
         
         boolean insulation, reinforcement, chemicalResist;
         //get check box values
@@ -264,8 +294,10 @@ public class PipeUI extends javax.swing.JFrame {
         
         PipeChecker cPipe = new PipeChecker();
         
+        
+        type = cPipe.check(newGrade, colour, insulation, reinforcement);
 
-        switch (cPipe.check(newGrade, 1, insulation, reinforcement)) {
+        switch (type) {
             case 0:  
                      break;
             case 1:  Pipe1 aPipe1 =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
@@ -292,7 +324,8 @@ public class PipeUI extends javax.swing.JFrame {
         lblCost.setText(String.valueOf(cost));
    
         JDialog.setDefaultLookAndFeelDecorated(true);
-    int response = JOptionPane.showConfirmDialog(null, "This pipe costs :£" + cost + 
+    int response = JOptionPane.showConfirmDialog(null, "You require a type " + type 
+            + ". This pipe costs £" + cost + 
             ". Would you like to add to order?", "Add to order",
         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
    
@@ -309,7 +342,7 @@ public class PipeUI extends javax.swing.JFrame {
                 " Lenght: " + newLength + " Cost: " + cost);
         
         lstOrder.add(lstEntry); // adds to list
-        clear();
+        clearText();
     }  
         
     } catch (Exception exRef) {
@@ -325,7 +358,7 @@ public class PipeUI extends javax.swing.JFrame {
 
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
         // TODO add your handling code here:
-         clear();
+         clearText();
          lstOrder.clear(); //???
         
         lblCost.setText("");
@@ -337,11 +370,15 @@ public class PipeUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbGradeActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void rdbTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbTwoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_rdbTwoActionPerformed
 
-    private void clear()
+    private void rdbOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbOneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdbOneActionPerformed
+
+    private void clearText()
     {
         //cmbGrade.setSelectedItem(1);  
         txtLength.setText(""); 
@@ -403,12 +440,12 @@ public class PipeUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblTotal;
     private java.awt.List lstOrder;
     private javax.swing.JRadioButton rdbNone;
+    private javax.swing.JRadioButton rdbOne;
+    private javax.swing.JRadioButton rdbTwo;
     private javax.swing.JTextField txtLength;
     private javax.swing.JTextField txtRad;
     // End of variables declaration//GEN-END:variables
