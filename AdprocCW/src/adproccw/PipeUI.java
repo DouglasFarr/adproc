@@ -6,6 +6,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JDialog;
 import javax.swing.*;
 import java.util.ArrayList;
+// for the image
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
 /**
  *
  * @author Compaq
@@ -23,13 +27,11 @@ public class PipeUI extends javax.swing.JFrame {
      */
     public PipeUI() {
         initComponents();
+        groupRadioButtons();
+       
         
-    ButtonGroup group = new ButtonGroup();
-    group.add(rdbNone);
-    group.add(rdbOne);
-    group.add(rdbTwo);        
-        
-    }
+        }
+    
 
     /**
      * This method is called from within the constructor to initialise the form.
@@ -65,10 +67,12 @@ public class PipeUI extends javax.swing.JFrame {
         txtQuantity = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         BtnEdit = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        BtnTables = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnOrder.setText("Add to Order");
+        btnOrder.setText("Get Price");
         btnOrder.setName("btnOrder"); // NOI18N
         btnOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +140,7 @@ public class PipeUI extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel6.setText("PipesR’us");
+        jLabel6.setText("Pipes'Я’us");
 
         rdbNone.setSelected(true);
         rdbNone.setText("None");
@@ -165,102 +169,130 @@ public class PipeUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("“PipesR’us” is a company producing a variety of pipes for water, drainage, fuel, gas, conduit, plumbing and heating.");
+
+        BtnTables.setText("View Charts");
+        BtnTables.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTablesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRemove)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTotal)
-                .addGap(49, 49, 49))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(136, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(cbxInsulation)
-                        .addComponent(cbxResistant)
-                        .addComponent(cbxReinforce))
-                    .addComponent(btnOrder)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lstOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel9))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(BtnTables)
+                        .addGap(88, 88, 88)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxResistant)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel2)
-                                            .addGap(12, 12, 12))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(18, 18, 18)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtLength)
-                                        .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(rdbNone)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(rdbOne)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(rdbTwo)
-                                    .addGap(2, 2, 2))))
-                        .addGap(2, 2, 2)))
-                .addGap(256, 256, 256))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3))
+                                        .addGap(20, 20, 20)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtLength, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cbxInsulation)
+                                    .addComponent(cbxReinforce)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(rdbNone)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(rdbOne)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rdbTwo)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(200, 200, 200)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(3, 3, 3)
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblCost))
+                                            .addComponent(btnOrder, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnRemove)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnEdit)
+                                .addGap(163, 163, 163)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblTotal)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel6))
-                    .addComponent(lstOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel8)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(191, 191, 191)
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCost))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel6)
+                        .addGap(372, 372, 372)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel9))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdbOne)
-                    .addComponent(rdbTwo)
-                    .addComponent(rdbNone))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rdbOne)
+                            .addComponent(rdbTwo)
+                            .addComponent(rdbNone)))
+                    .addComponent(BtnTables))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(cbxInsulation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxReinforce)
@@ -270,13 +302,13 @@ public class PipeUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCost)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOrder)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(lstOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -292,73 +324,46 @@ public class PipeUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
-             
-       // try {
+     
+    try {
+      	getInputs();
 
-        
-        getInputs();
- 
-        //creates new object
-        //Pipe testPipe = new Pipe(newLength, newRadius, newGrade, 1, insulation, 
-        //      reinforcement, chemicalResist);
-        
-        PipeChecker cPipe = new PipeChecker();
-        
-        type = cPipe.check(newGrade, colour, insulation, reinforcement);
+      	//creates new object
+      	//Pipe testPipe = new Pipe(newLength, newRadius, newGrade, 1, insulation, 
+      	//      reinforcement, chemicalResist);
 
-        
-        switch (type) {
-            case 0:  
-                    aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-                    //JOptionPane.showMessageDialog(null, "Pipe not supplied");
-                    //return;
-            case 1:   aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 2:   aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 3:   aPipe = new Pipe3(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 4:   aPipe = new Pipe4(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 5:   aPipe = new Pipe5(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-        }
-        
-        
-        //cost = aPipe.getPrice();  // need to round, worth doing in function?
-         
-        cost = 10 * quantity;
-        
-        //sets lable
-        lblCost.setText(String.valueOf(cost));
-   
-        JDialog.setDefaultLookAndFeelDecorated(true);
-    int response = JOptionPane.showConfirmDialog(null, "You require a type " + type 
-            + ". This pipe costs £" + cost + 
-            ". Would you like to add to order?", "Add to order",
-        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-   
-    if (response == JOptionPane.YES_OPTION) {
-      
-        lstOrderedPipes.add(aPipe);
-        
-        updateTotal();
-       
-        String lstEntry;
-        // list item
-        lstEntry = ("Pipe grade: " + newGrade + " Radius: " + newRadius +
-                " Lenght: " + newLength + " Cost: £" + cost + " x (" + quantity + ")");
-        
-        lstOrder.add(lstEntry); // adds to list
-        
-        clearText();
-    }  
-        
-    //} catch (Exception exRef) {
-                    // catch block, or exception handler, could have more than one handler
-    //                JOptionPane.showMessageDialog(null, exRef);
- //}
+      	PipeChecker cPipe = new PipeChecker();
+
+      	type = cPipe.check(newGrade, colour, insulation, reinforcement);
+
+
+      	initPipe(type);
+
+
+      	cost = aPipe.getPrice(); // need to round, worth doing in function?
+
+      	cost = 10 * quantity; //Hard coded 10 for testing 
+
+      	//sets lable
+      	lblCost.setText(String.valueOf(cost));
+
+      	//Yes or no option message box
+      	JDialog.setDefaultLookAndFeelDecorated(true);
+      	int response = JOptionPane.showConfirmDialog(null, "You require a type " + type + ". This pipe costs £" + cost +
+      		". Would you like to add to order?", "Add to order",
+      	JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+      	if (response == JOptionPane.YES_OPTION) {
+
+      	    addToOrder();
+
+      	}
+
+
+      } catch (Exception exRef) {
+      	//catch block, or exception handler 
+      	JOptionPane.showMessageDialog(null, exRef);
+      }
     
     }//GEN-LAST:event_btnOrderActionPerformed
 
@@ -369,9 +374,9 @@ public class PipeUI extends javax.swing.JFrame {
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
         // TODO add your handling code here:
          clearText();
-         lstOrder.clear(); //???
+        lstOrder.removeAll(); //???
         
-       lstOrderedPipes.clear();
+        lstOrderedPipes.clear();
          
         lblCost.setText("");
         lblTotal.setText("");
@@ -393,12 +398,15 @@ public class PipeUI extends javax.swing.JFrame {
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         // TODO add your handling code here:
         int index = lstOrder.getSelectedIndex();
+        
+        if(checkList() == true)
+        {
         lstOrder.remove(index);
         
         lstOrderedPipes.remove(index);
         
         updateTotal();
-        
+        }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
@@ -408,6 +416,9 @@ public class PipeUI extends javax.swing.JFrame {
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
                 
         int index = lstOrder.getSelectedIndex();
+        
+         if(checkList() == true)
+        {
         Pipe xPipe = lstOrderedPipes.get(index);
         
         System.out.println(xPipe.getPipeLength());
@@ -433,14 +444,29 @@ public class PipeUI extends javax.swing.JFrame {
     cbxReinforce.setSelected(xPipe.isPipeReinforcement());
     cbxResistant.setSelected(xPipe.isPipeChemicalRes());
         
-   // btnRemove.doClick();
+    btnRemove.doClick();
         
         
         //quantity = Integer.parseInt(txtQuantity.getText()); 
         
-        
+        }   
         
     }//GEN-LAST:event_BtnEditActionPerformed
+
+    private void BtnTablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTablesActionPerformed
+       
+         try{
+         BufferedImage myPicture = ImageIO.read(new File("JavaCW-Tables.png"));
+         ImageIcon icon = new ImageIcon(myPicture);
+         JLabel label = new JLabel(icon);
+         JOptionPane.showMessageDialog(null, label);
+        
+        } catch (Exception exRef) {
+      	//catch block, or exception handler 
+      	JOptionPane.showMessageDialog(null, exRef);
+      }
+        
+    }//GEN-LAST:event_BtnTablesActionPerformed
 
     private void clearText()
     {
@@ -474,9 +500,8 @@ public class PipeUI extends javax.swing.JFrame {
      //convert to correct type from string
         newGrade = 1; //(Integer) cmbGrade.getSelectedItem(); 
         
-        
-        newRadius = Integer.parseInt(txtLength.getText()); 
-        newLength = Double.parseDouble(txtRad.getText());
+        newRadius = Double.parseDouble(txtRad.getText()); 
+        newLength = Double.parseDouble(txtLength.getText()); 
         
         if (rdbNone.isSelected())
         { colour = 0;
@@ -497,6 +522,74 @@ public class PipeUI extends javax.swing.JFrame {
         
         quantity = Integer.parseInt(txtQuantity.getText()); 
         
+    }
+    
+    private void addToOrder()
+    {
+    lstOrderedPipes.add(aPipe);
+        
+        updateTotal();
+       
+        String lstEntry;
+        // list item
+        lstEntry = ("Pipe grade: " + newGrade + " Radius: " + newRadius +
+                " Lenght: " + newLength + " Cost: £" + cost + " x (" + quantity + ")");
+        
+        lstOrder.add(lstEntry); // adds to list
+        
+        clearText();
+    }
+    
+    private void initPipe(int type)
+    {
+    switch (type) {
+            case 0:  
+                    aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
+                     break;
+                    //JOptionPane.showMessageDialog(null, "Pipe not supplied");
+                    //return;
+            case 1:   aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
+                     break;
+            case 2:   aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
+                     break;
+            case 3:   aPipe = new Pipe3(newLength, newRadius, newGrade, chemicalResist);
+                     break;
+            case 4:   aPipe = new Pipe4(newLength, newRadius, newGrade, chemicalResist);
+                     break;
+            case 5:   aPipe = new Pipe5(newLength, newRadius, newGrade, chemicalResist);
+                     break;
+        }
+    
+    }
+    
+    private boolean checkList()
+    {
+     boolean valid = false;
+     int index = lstOrder.getSelectedIndex();
+     if(index != -1)
+        {
+           valid = true;
+      }else if(lstOrderedPipes.size() == 0)
+      {
+      msg("You have no items in the list");
+      } else {
+     msg("Please select an item");
+      }
+     
+     return valid;
+    }
+    
+    private void groupRadioButtons()
+    {
+    ButtonGroup group = new ButtonGroup();
+    group.add(rdbNone);
+    group.add(rdbOne);
+    group.add(rdbTwo);
+    }
+    
+    private void msg(String s)
+    {
+    JOptionPane.showMessageDialog(null, s);
     }
     
     /**
@@ -537,6 +630,7 @@ public class PipeUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEdit;
     private javax.swing.JButton BtnNew;
+    private javax.swing.JButton BtnTables;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnRemove;
     private javax.swing.JCheckBox cbxInsulation;
@@ -551,6 +645,7 @@ public class PipeUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblTotal;
     private java.awt.List lstOrder;
