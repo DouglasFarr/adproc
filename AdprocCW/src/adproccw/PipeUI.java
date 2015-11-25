@@ -5,12 +5,16 @@ package adproccw;
 import javax.swing.JOptionPane;
 import javax.swing.JDialog;
 import javax.swing.*;
+import java.util.ArrayList;
 /**
  *
  * @author Compaq
  */
 public class PipeUI extends javax.swing.JFrame {
 
+    
+    private  ArrayList<Double> listCost = new ArrayList<Double>();
+    private double total;
     /**
      * Creates new form PipeUI
      */
@@ -54,6 +58,7 @@ public class PipeUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         rdbNone = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
+        btnRemove = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +137,13 @@ public class PipeUI extends javax.swing.JFrame {
 
         jLabel7.setText("Colours:");
 
+        btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,6 +158,8 @@ public class PipeUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRemove)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -234,7 +248,8 @@ public class PipeUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(lblTotal)
-                    .addComponent(BtnNew))
+                    .addComponent(BtnNew)
+                    .addComponent(btnRemove))
                 .addContainerGap())
         );
 
@@ -245,7 +260,6 @@ public class PipeUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //set varibles 
-        double total;
         double cost;
         int newGrade;
         int newRadius;
@@ -331,11 +345,9 @@ public class PipeUI extends javax.swing.JFrame {
    
     if (response == JOptionPane.YES_OPTION) {
       
+        listCost.add(cost);
         
-        //add cost to total 
-        total = Double.parseDouble(lblTotal.getText()); //use lbl as varible? 
-        total = total + cost;
-        lblTotal.setText(String.valueOf(total));
+        updateTotal();
         
         // list item
         lstEntry = ("Pipe grade: " + newGrade + " Radius: " + newRadius +
@@ -361,6 +373,8 @@ public class PipeUI extends javax.swing.JFrame {
          clearText();
          lstOrder.clear(); //???
         
+         listCost.clear();
+         
         lblCost.setText("");
         lblTotal.setText("");
        
@@ -378,6 +392,17 @@ public class PipeUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdbOneActionPerformed
 
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        // TODO add your handling code here:
+        int index = lstOrder.getSelectedIndex();
+        lstOrder.remove(index);
+        
+        listCost.remove(index);
+        
+        updateTotal();
+        
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
     private void clearText()
     {
         //cmbGrade.setSelectedItem(1);  
@@ -390,6 +415,17 @@ public class PipeUI extends javax.swing.JFrame {
         cbxResistant.setSelected(false);
     }
     
+    private void updateTotal()
+    {
+        total = 0;
+        
+        for(double i: listCost)
+        { 
+           total += i;
+                }
+ 
+        lblTotal.setText(String.valueOf(total));
+    }
     
     /**
      * @param args the command line arguments
@@ -429,6 +465,7 @@ public class PipeUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnNew;
     private javax.swing.JButton btnOrder;
+    private javax.swing.JButton btnRemove;
     private javax.swing.JCheckBox cbxInsulation;
     private javax.swing.JCheckBox cbxReinforce;
     private javax.swing.JCheckBox cbxResistant;
