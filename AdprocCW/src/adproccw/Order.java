@@ -6,7 +6,7 @@ package adproccw;
  *
  * @author James Taylor <up368574@myport.ac.uk>
  */
-public class PipeOrder {
+public class Order {
     
     private Pipe orderPipe;
     private int orderQuantity;
@@ -47,3 +47,4 @@ public class PipeOrder {
     }
     
 }
+
