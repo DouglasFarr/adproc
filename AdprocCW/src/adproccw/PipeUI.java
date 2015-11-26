@@ -17,11 +17,13 @@ import java.io.File;
 public class PipeUI extends javax.swing.JFrame {
 
     
-    private  ArrayList<Pipe> lstOrderedPipes = new ArrayList<Pipe>(); 
+    private  ArrayList<Order> orderList = new ArrayList<Order>(); 
     private double total, cost, newLength, newRadius;
     private int newGrade, type, colour, quantity;  
     private  boolean insulation, reinforcement, chemicalResist;
     private Pipe aPipe;
+    private Order newOrder;
+    private PipeChecker cPipe = new PipeChecker();
     /**
      * Creates new form PipeUI
      */
@@ -50,7 +52,7 @@ public class PipeUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblCost = new javax.swing.JLabel();
-        lstOrder = new java.awt.List();
+        lstbxOrder = new java.awt.List();
         jLabel5 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         cbxInsulation = new javax.swing.JCheckBox();
@@ -163,24 +165,21 @@ public class PipeUI extends javax.swing.JFrame {
                         .addComponent(BtnTables)
                         .addGap(88, 88, 88)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxResistant)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxResistant)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3))
-                                        .addGap(20, 20, 20)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtLength, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(cbxInsulation)
-                                    .addComponent(cbxReinforce)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtLength, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbxInsulation)
+                            .addComponent(cbxReinforce)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
@@ -228,7 +227,7 @@ public class PipeUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(372, 372, 372))))
-                    .addComponent(lstOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lstbxOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -280,7 +279,7 @@ public class PipeUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOrder)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(lstOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lstbxOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -296,23 +295,21 @@ public class PipeUI extends javax.swing.JFrame {
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
      
-    try {
+  //  try {
       	
         getInputs();
           
         validateInput(); // empty
         
         //needs to be added as a method
-      	PipeChecker cPipe = new PipeChecker();
       	type = cPipe.check(newGrade, colour, insulation, reinforcement);
 
-        //initialize the type pipe  
-      	initPipe(type);
+      	initPipe(type);        //initialize the type pipe  
 
-      	cost = aPipe.getPrice(); // need to round
-
-      	cost = 10 * quantity; //Hard coded 10 for testing 
-
+        newOrder = new Order(aPipe, quantity);
+        
+        cost = newOrder.getOrderPrice();
+        
       	//sets lable.... needed? *********************************************************************************************
       	lblCost.setText(String.valueOf(cost));
 
@@ -329,10 +326,10 @@ public class PipeUI extends javax.swing.JFrame {
       	}
 
 
-      } catch (Exception exRef) {
-      	//catch block, or exception handler 
-      	JOptionPane.showMessageDialog(null, exRef);
-      }
+//      } catch (Exception exRef) {
+//      	//catch block, or exception handler 
+//      	JOptionPane.showMessageDialog(null, exRef);
+//      }
     
     }//GEN-LAST:event_btnOrderActionPerformed
 
@@ -342,8 +339,8 @@ public class PipeUI extends javax.swing.JFrame {
         clearText();
         
         //empties lists
-        lstOrder.removeAll(); 
-        lstOrderedPipes.clear();
+        lstbxOrder.removeAll(); 
+        orderList.clear();
          
         //resets lables
         lblCost.setText("0");
@@ -354,14 +351,14 @@ public class PipeUI extends javax.swing.JFrame {
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         
         //gets se;ected item
-        int index = lstOrder.getSelectedIndex();
+        int index = lstbxOrder.getSelectedIndex();
         
         // if an item is slected remove it 
         if(validSelected() == true)
         {
-        lstOrder.remove(index);
+        lstbxOrder.remove(index);
         
-        lstOrderedPipes.remove(index);
+        orderList.remove(index);
         
         updateTotal();
         }
@@ -369,16 +366,16 @@ public class PipeUI extends javax.swing.JFrame {
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
                 
-        int index = lstOrder.getSelectedIndex();
+        int index = lstbxOrder.getSelectedIndex();
         
         if(validSelected() == true)
         {
-        Pipe xPipe = lstOrderedPipes.get(index);
-        
-        System.out.println(xPipe.getPipeLength());
+        Order xOrder = orderList.get(index);
+        Pipe xPipe = xOrder.getPipe();
         
         txtLength.setText(Double.toString(xPipe.getPipeLength()));
         txtRad.setText(Double.toString(xPipe.getPipeRadius()));
+        txtQuantity.setText(Integer.toString(xOrder.getQuantity()));
         
         //getPipeGrade()
         
@@ -443,9 +440,9 @@ public class PipeUI extends javax.swing.JFrame {
         total = 0;
         
         //for each pipe in list add the price 
-        for(Pipe aPipe:  lstOrderedPipes)
+        for(Order aOrder:  orderList)
         { 
-           total += 10; //aPipe.getPrice(); // Fixed to 10 for test
+           total += 10; //aOrder.getOrderPrice();
         }
  
         //updates lable
@@ -458,7 +455,6 @@ public class PipeUI extends javax.swing.JFrame {
      //convert to correct type from string
         newGrade = cmbGrade.getSelectedIndex() + 1; //  cmbGrade.getSelectedItem(); 
          
-        
         newRadius = Double.parseDouble(txtRad.getText()); 
         newLength = Double.parseDouble(txtLength.getText()); 
         
@@ -491,16 +487,18 @@ public class PipeUI extends javax.swing.JFrame {
     
     private void addToOrder()
     {
-    lstOrderedPipes.add(aPipe);
+
+    newOrder = new Order(aPipe, quantity);
+        
+    orderList.add(newOrder);
         
         updateTotal();
        
         String lstEntry;
         // list item
-        lstEntry = ("Pipe grade: " + newGrade + " Radius: " + newRadius +
-                " Lenght: " + newLength + " Cost: £" + cost + " x (" + quantity + ")");
+        lstEntry = (newOrder.valuesToString());
         
-        lstOrder.add(lstEntry); // adds to list
+        lstbxOrder.add(lstEntry); // adds to list
         
         clearText();
     }
@@ -530,11 +528,11 @@ public class PipeUI extends javax.swing.JFrame {
     private boolean validSelected()
     {
      boolean valid = false;
-     int index = lstOrder.getSelectedIndex();
+     int index = lstbxOrder.getSelectedIndex();
      if(index != -1)
         {
            valid = true;
-      }else if(lstOrderedPipes.isEmpty())
+      }else if(orderList.isEmpty())
       {
       msg("You have no items in the list");
       } else {
@@ -613,7 +611,7 @@ public class PipeUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblTotal;
-    private java.awt.List lstOrder;
+    private java.awt.List lstbxOrder;
     private javax.swing.JRadioButton rdbNone;
     private javax.swing.JRadioButton rdbOne;
     private javax.swing.JRadioButton rdbTwo;

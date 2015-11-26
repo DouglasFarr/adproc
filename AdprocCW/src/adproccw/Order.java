@@ -17,9 +17,19 @@ public class Order {
      * @param pipe
      * @param quantity 
      */
-    public void PipeOrder(Pipe pipe, int quantity) {
+    public Order(Pipe pipe, int quantity) {
         orderPipe = pipe;
         orderQuantity = quantity;
+    }
+    
+    public String valuesToString() {
+        String s;
+        s = "Pipe grade: " + orderPipe.getPipeGrade() + " Radius: " + orderPipe.getPipeRadius() +
+                " Length: " + orderPipe.getPipeLength() + " colours: " + orderPipe.getPipeColours() + 
+                " Insulation: " + orderPipe.isPipeInsulation() + " Reinforcement: " + orderPipe.isPipeReinforcement() +
+                " ChemicalRes: " + orderPipe.isPipeChemicalRes()+ " quantity: "  + " cost: £" + getOrderPrice() ; 
+                      
+        return s;            
     }
     
     public void setQuantity(int quantity) {
