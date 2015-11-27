@@ -43,6 +43,7 @@ public abstract class Pipe {
         pipeReinforcement = reinforcement;
         pipeChemicalRes = chemicalResist;
         calcPrice();
+        System.out.println("pipe price" + pipePrice);
     }
     
     /**
@@ -55,7 +56,8 @@ public abstract class Pipe {
                         - (Math.PI * Math.pow(innerRadius, 2.0));
         double pipeLengthI = pipeLength * 39.37;
         double basicPrice = pipeArea * pipeLengthI * prices[pipeGrade-1];
-        pipePrice = basicPrice * priceMultiplier;
+                System.out.println("basic Price" + basicPrice);
+        pipePrice = basicPrice + (basicPrice * priceMultiplier);
         if (pipeChemicalRes)
             pipePrice += basicPrice * 0.12; 
     }

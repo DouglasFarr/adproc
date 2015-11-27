@@ -2,6 +2,8 @@
  */
 package adproccw;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author James Taylor <up368574@myport.ac.uk>
@@ -24,10 +26,13 @@ public class Order {
     
     public String valuesToString() {
         String s;
+        
+        String cost = new DecimalFormat("0.00").format(getOrderPrice());
+        
         s = "Pipe grade: " + orderPipe.getPipeGrade() + " Radius: " + orderPipe.getPipeRadius() +
                 " Length: " + orderPipe.getPipeLength() + " colours: " + orderPipe.getPipeColours() + 
                 " Insulation: " + orderPipe.isPipeInsulation() + " Reinforcement: " + orderPipe.isPipeReinforcement() +
-                " ChemicalRes: " + orderPipe.isPipeChemicalRes()+ " quantity: "  + " cost: £" + getOrderPrice() ; 
+                " ChemicalRes: " + orderPipe.isPipeChemicalRes()+ " quantity: "  + " cost: £" + cost ; 
                       
         return s;            
     }
@@ -53,7 +58,13 @@ public class Order {
     }
     
     public double getOrderPrice() {
-        return orderPipe.getPrice() * orderQuantity;
+       
+        
+        double x = orderPipe.getPrice() *  orderQuantity;
+        
+        return (x);
+          
+                
     }
     
 }

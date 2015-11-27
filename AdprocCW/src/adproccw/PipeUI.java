@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.text.DecimalFormat;
 /**
  *
  * @author Compaq
@@ -18,7 +19,8 @@ public class PipeUI extends javax.swing.JFrame {
 
     
     private  ArrayList<Order> orderList = new ArrayList<Order>(); 
-    private double total, cost, newLength, newRadius;
+    private double total, newLength, newRadius;
+    private String cost;
     private int newGrade, type, colour, quantity;  
     private  boolean insulation, reinforcement, chemicalResist;
     private Pipe aPipe;
@@ -57,7 +59,7 @@ public class PipeUI extends javax.swing.JFrame {
         BtnEdit = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         BtnTables = new javax.swing.JButton();
-        panel1 = new java.awt.Panel();
+        inputPanel = new java.awt.Panel();
         jLabel7 = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -118,7 +120,7 @@ public class PipeUI extends javax.swing.JFrame {
             }
         });
 
-        panel1.setBackground(new java.awt.Color(204, 204, 204));
+        inputPanel.setBackground(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
 
         jLabel7.setText("Colours:");
 
@@ -162,46 +164,46 @@ public class PipeUI extends javax.swing.JFrame {
         rdbNone.setSelected(true);
         rdbNone.setText("None");
 
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout inputPanelLayout = new javax.swing.GroupLayout(inputPanel);
+        inputPanel.setLayout(inputPanelLayout);
+        inputPanelLayout.setHorizontalGroup(
+            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inputPanelLayout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxResistant)
                             .addComponent(cbxInsulation)
                             .addComponent(cbxReinforce)
-                            .addGroup(panel1Layout.createSequentialGroup()
+                            .addGroup(inputPanelLayout.createSequentialGroup()
                                 .addComponent(rdbNone)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rdbOne)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rdbTwo))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(inputPanelLayout.createSequentialGroup()
+                                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3))
                                 .addGap(20, 20, 20)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtLength, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panel1Layout.createSequentialGroup()
+                            .addGroup(inputPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel7)))
-                    .addGroup(panel1Layout.createSequentialGroup()
+                    .addGroup(inputPanelLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel1Layout.createSequentialGroup()
+                    .addGroup(inputPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel1Layout.createSequentialGroup()
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(inputPanelLayout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,25 +211,25 @@ public class PipeUI extends javax.swing.JFrame {
                             .addComponent(btnOrder, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+        inputPanelLayout.setVerticalGroup(
+            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdbOne)
                     .addComponent(rdbTwo)
                     .addComponent(rdbNone))
@@ -238,11 +240,11 @@ public class PipeUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxResistant)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCost)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -281,7 +283,7 @@ public class PipeUI extends javax.swing.JFrame {
                                 .addGap(34, 34, 34)
                                 .addComponent(BtnTables)
                                 .addGap(142, 142, 142)
-                                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -298,7 +300,7 @@ public class PipeUI extends javax.swing.JFrame {
                         .addComponent(BtnTables))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(lstbxOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -314,6 +316,7 @@ public class PipeUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+       
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
      
   //  try {
@@ -329,7 +332,9 @@ public class PipeUI extends javax.swing.JFrame {
 
         newOrder = new Order(aPipe, quantity);
         
-        cost = newOrder.getOrderPrice();
+        
+       
+        cost = new DecimalFormat("0.00").format(newOrder.getOrderPrice());
         
       	//sets lable.... needed? *********************************************************************************************
       	lblCost.setText(String.valueOf(cost));
@@ -419,8 +424,6 @@ public class PipeUI extends javax.swing.JFrame {
     btnRemove.doClick();
         
         
-        //quantity = Integer.parseInt(txtQuantity.getText()); 
-        
         }   
         
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -463,7 +466,7 @@ public class PipeUI extends javax.swing.JFrame {
         //for each pipe in list add the price 
         for(Order aOrder:  orderList)
         { 
-           total += 10; //aOrder.getOrderPrice();
+           total += aOrder.getOrderPrice();
         }
  
         //updates lable
@@ -497,7 +500,7 @@ public class PipeUI extends javax.swing.JFrame {
         chemicalResist = cbxResistant.isSelected();
         
         quantity = Integer.parseInt(txtQuantity.getText()); 
-        
+               
     }
     
     private void validateInput()
@@ -621,6 +624,7 @@ public class PipeUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbxReinforce;
     private javax.swing.JCheckBox cbxResistant;
     private javax.swing.JComboBox cmbGrade;
+    private java.awt.Panel inputPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -633,7 +637,6 @@ public class PipeUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblTotal;
     private java.awt.List lstbxOrder;
-    private java.awt.Panel panel1;
     private javax.swing.JRadioButton rdbNone;
     private javax.swing.JRadioButton rdbOne;
     private javax.swing.JRadioButton rdbTwo;

@@ -8,7 +8,6 @@ package adproccw;
  */
 public class Pipe1 extends Pipe {
     
-    private double priceMultiplier = 0.0;
     
     /**
      * 
