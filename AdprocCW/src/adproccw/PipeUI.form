@@ -419,7 +419,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="cbxResistant">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ChemicalResist"/>
+                <Property name="text" type="java.lang.String" value="Chemical Resistance"/>
               </Properties>
             </Component>
           </SubComponents>

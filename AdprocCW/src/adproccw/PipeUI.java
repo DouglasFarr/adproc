@@ -188,7 +188,7 @@ public class PipeUI extends javax.swing.JFrame {
 
         cbxReinforce.setText("Reinforcement");
 
-        cbxResistant.setText("ChemicalResist");
+        cbxResistant.setText("Chemical Resistance");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
