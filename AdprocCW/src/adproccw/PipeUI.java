@@ -352,37 +352,36 @@ public class PipeUI extends javax.swing.JFrame {
         boolean valid = false;
         
         if (getInputs()) {
-            //System.out.println("Inputs good");
             valid = validateInput();
-            //System.out.println("Inputs valid: " + valid);
-        }
-        
-        if (valid) {
-            type = cPipe.check(newGrade, colour, insulation, reinforcement);
-            if (!(type < 1 || type > 5)) { 
-                initPipe(type);        //initialize the type pipe
-                newOrder = new Order(aPipe , quantity);
-                cost = new DecimalFormat("0.00").format(newOrder.getOrderPrice());
+            if (valid) {
+                type = cPipe.check(newGrade, colour, insulation, reinforcement);
+                if (!(type < 1 || type > 5)) { 
+                    initPipe(type);        //initialize the type pipe
+                    newOrder = new Order(aPipe , quantity);
+                    cost = new DecimalFormat("0.00").format(newOrder.getOrderPrice());
 
-                //sets lable.... needed? 
-                //probably not
-                //lblCost.setText(String.valueOf(cost));
+                    //sets lable.... needed? 
+                    //probably not
+                    //lblCost.setText(String.valueOf(cost));
 
-                //Yes or no option message box asked if theyd like to add to order
-                JDialog.setDefaultLookAndFeelDecorated(true);
-                int response = JOptionPane.showConfirmDialog(null, "You require a type " + type + ". This pipe costs £" + cost +
-                        ". Would you like to add to order?", "Add to order",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    //Yes or no option message box asked if theyd like to add to order
+                    JDialog.setDefaultLookAndFeelDecorated(true);
+                    int response = JOptionPane.showConfirmDialog(null, "You require a type " + type + ". This pipe costs £" + cost +
+                            ". Would you like to add to order?", "Add to order",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-                if (response == JOptionPane.YES_OPTION) {
-                    addToOrder();
+                    if (response == JOptionPane.YES_OPTION) {
+                        addToOrder();
+                    }
+                    txtQuantity.setText("1");
+                } else {
+                    msg("Your chosen options do not create a pipe of a valid type");
                 }
-                txtQuantity.setText("1");
             } else {
-                msg("Your chosen options do not create a pipe of a valid type");
+                msg("Inputs are not within a valid range");
             }
         } else {
-            msg("Inputs are invalid");
+            msg("Inputs are of an invalid type. Make sure to use numeric values");
         }
     }//GEN-LAST:event_btnOrderActionPerformed
 
