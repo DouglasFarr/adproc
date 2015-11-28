@@ -26,6 +26,7 @@ public class PipeUI extends javax.swing.JFrame {
     private Pipe aPipe;
     private Order newOrder;
     private PipeChecker cPipe = new PipeChecker();
+    
     /**
      * Creates new form PipeUI
      */
@@ -33,7 +34,7 @@ public class PipeUI extends javax.swing.JFrame {
         
         initComponents();
         groupRadioButtons();
-       
+        txtQuantity.setText("1");
         ImageIcon img = new ImageIcon("pipes.png");
         
         setIconImage(img.getImage());
@@ -128,9 +129,9 @@ public class PipeUI extends javax.swing.JFrame {
 
         jLabel1.setText("Plastic Grade:");
 
-        jLabel2.setText("Length (m):");
+        jLabel2.setText("Length (Meters):");
 
-        jLabel3.setText("Radius (Inch):");
+        jLabel3.setText("Diameter (Inches):");
 
         jLabel4.setText("Cost: £");
 
@@ -187,7 +188,7 @@ public class PipeUI extends javax.swing.JFrame {
 
         cbxReinforce.setText("Reinforcement");
 
-        cbxResistant.setText("ChemicalResist");
+        cbxResistant.setText("Chemical Resistance");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -235,13 +236,17 @@ public class PipeUI extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3))
-                                .addGap(30, 30, 30)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtRad, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtLength)))
+                                        .addGap(30, 30, 30)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(txtLength)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,28 +269,25 @@ public class PipeUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(lblCost))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lblCost))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOrder)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -293,42 +295,42 @@ public class PipeUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(61, 61, 61)
-                .addComponent(BtnTables)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemove)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnEdit)
+                        .addGap(163, 163, 163)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTotal)
+                        .addGap(0, 194, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lstbxOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(12, 12, 12)
-                            .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnRemove)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(BtnEdit)
-                            .addGap(163, 163, 163)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblTotal))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(10, 10, 10))
+                        .addComponent(lstbxOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(226, 226, 226)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnTables))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(BtnTables, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnTables)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lstbxOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -346,45 +348,41 @@ public class PipeUI extends javax.swing.JFrame {
 
        
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
-     
-  //  try {
-      	
-        getInputs();
-          
-        validateInput(); // empty
         
-        //needs to be added as a method
-      	type = cPipe.check(newGrade, colour, insulation, reinforcement);
-
-      	initPipe(type);        //initialize the type pipe  
-
-        newOrder = new Order(aPipe, quantity);
+        boolean valid = false;
         
-        
-       
-        cost = new DecimalFormat("0.00").format(newOrder.getOrderPrice());
-        
-      	//sets lable.... needed? *********************************************************************************************
-      	lblCost.setText(String.valueOf(cost));
+        if (getInputs()) {
+            valid = validateInput();
+            if (valid) {
+                type = cPipe.check(newGrade, colour, insulation, reinforcement);
+                if (!(type < 1 || type > 5)) { 
+                    initPipe(type);        //initialize the type pipe
+                    newOrder = new Order(aPipe , quantity);
+                    cost = new DecimalFormat("0.00").format(newOrder.getOrderPrice());
 
-      	//Yes or no option message box asked if theyd like to add to order
-      	JDialog.setDefaultLookAndFeelDecorated(true);
-      	int response = JOptionPane.showConfirmDialog(null, "You require a type " + type + ". This pipe costs £" + cost +
-      		". Would you like to add to order?", "Add to order",
-      	JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    //sets lable.... needed? 
+                    //probably not
+                    //lblCost.setText(String.valueOf(cost));
 
-      	if (response == JOptionPane.YES_OPTION) {
+                    //Yes or no option message box asked if theyd like to add to order
+                    JDialog.setDefaultLookAndFeelDecorated(true);
+                    int response = JOptionPane.showConfirmDialog(null, "You require a type " + type + ". This pipe costs £" + cost +
+                            ". Would you like to add to order?", "Add to order",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-      	    addToOrder();
-
-      	}
-
-
-//      } catch (Exception exRef) {
-//      	//catch block, or exception handler 
-//      	JOptionPane.showMessageDialog(null, exRef);
-//      }
-    
+                    if (response == JOptionPane.YES_OPTION) {
+                        addToOrder();
+                    }
+                    txtQuantity.setText("1");
+                } else {
+                    msg("Your chosen options do not create a pipe of a valid type");
+                }
+            } else {
+                msg("Inputs are not within a valid range");
+            }
+        } else {
+            msg("Inputs are of an invalid type. Make sure to use numeric values");
+        }
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
@@ -399,6 +397,8 @@ public class PipeUI extends javax.swing.JFrame {
         //resets lables
         lblCost.setText("0");
         lblTotal.setText("0");
+        
+        txtQuantity.setText("1");
        
     }//GEN-LAST:event_BtnNewActionPerformed
 
@@ -408,13 +408,10 @@ public class PipeUI extends javax.swing.JFrame {
         int index = lstbxOrder.getSelectedIndex();
         
         // if an item is slected remove it 
-        if(validSelected() == true)
-        {
-        lstbxOrder.remove(index);
-        
-        orderList.remove(index);
-        
-        updateTotal();
+        if(validSelected() == true) {
+            lstbxOrder.remove(index);
+            orderList.remove(index);
+            updateTotal();
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
@@ -422,34 +419,29 @@ public class PipeUI extends javax.swing.JFrame {
                 
         int index = lstbxOrder.getSelectedIndex();
         
-        if(validSelected() == true)
-        {
-        Order xOrder = orderList.get(index);
-        Pipe xPipe = xOrder.getPipe();
-        
-        txtLength.setText(Double.toString(xPipe.getPipeLength()));
-        txtRad.setText(Double.toString(xPipe.getPipeRadius()));
-        txtQuantity.setText(Integer.toString(xOrder.getQuantity()));
-        
-        //getPipeGrade()
-        
-        if (xPipe.getPipeColours()==0)
-        {
-        rdbNone.setSelected(true);
-        }else if (xPipe.getPipeColours()==1)
-        {
-        rdbOne.setSelected(true);
-        }
-        else
-        {
-        rdbTwo.setSelected(true);
-        }
-        
-    cbxInsulation.setSelected(xPipe.isPipeInsulation());
-    cbxReinforce.setSelected(xPipe.isPipeReinforcement());
-    cbxResistant.setSelected(xPipe.isPipeChemicalRes());
-        
-    btnRemove.doClick();
+        if(validSelected() == true) {
+            Order xOrder = orderList.get(index);
+            Pipe xPipe = xOrder.getPipe();
+
+            txtLength.setText(Double.toString(xPipe.getPipeLength()));
+            txtRad.setText(Double.toString(xPipe.getPipeDiameter()));
+            txtQuantity.setText(Integer.toString(xOrder.getQuantity()));
+
+            //getPipeGrade()
+
+            if (xPipe.getPipeColours()==0) {
+                rdbNone.setSelected(true);
+            } else if (xPipe.getPipeColours()==1) {
+                rdbOne.setSelected(true);
+            } else {
+                rdbTwo.setSelected(true);
+            }
+
+            cbxInsulation.setSelected(xPipe.isPipeInsulation());
+            cbxReinforce.setSelected(xPipe.isPipeReinforcement());
+            cbxResistant.setSelected(xPipe.isPipeChemicalRes());
+
+            btnRemove.doClick();
         
         
         }   
@@ -458,12 +450,11 @@ public class PipeUI extends javax.swing.JFrame {
 
     private void BtnTablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTablesActionPerformed
        
-         try{
-         BufferedImage myPicture = ImageIO.read(new File("JavaCW-Tables.png"));
-         ImageIcon icon = new ImageIcon(myPicture);
-         JLabel label = new JLabel(icon);
-         JOptionPane.showMessageDialog(null, label);
-        
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("JavaCW-Tables.png"));
+            ImageIcon icon = new ImageIcon(myPicture);
+            JLabel label = new JLabel(icon);
+            JOptionPane.showMessageDialog(null, label);
         } catch (Exception exRef) {
       	//catch block, or exception handler 
       	JOptionPane.showMessageDialog(null, exRef);
@@ -471,8 +462,7 @@ public class PipeUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BtnTablesActionPerformed
 
-    private void clearText()
-    { 
+    private void clearText() { 
         cmbGrade.setSelectedIndex(0);
         txtLength.setText(""); 
         txtRad.setText("");
@@ -487,8 +477,7 @@ public class PipeUI extends javax.swing.JFrame {
         rdbNone.setSelected(true);
     }
     
-    private void updateTotal()
-    {
+    private void updateTotal() {
         total = 0;
         
         //for each pipe in list add the price 
@@ -504,44 +493,59 @@ public class PipeUI extends javax.swing.JFrame {
         lblTotal.setText(totalCost);
     }
     
-    private void getInputs()
-    {
-    
-     //convert to correct type from string
-        newGrade = cmbGrade.getSelectedIndex() + 1; //  cmbGrade.getSelectedItem(); 
-         
-        newRadius = Double.parseDouble(txtRad.getText()); 
-        newLength = Double.parseDouble(txtLength.getText()); 
+    private boolean getInputs() {
         
-        if (rdbNone.isSelected())
-        { colour = 0;
+        double r = 0, l = 0;
+        int q = 0;
         
-        }else if (rdbOne.isSelected())
-        {
-        colour = 1;
-        }
-        else
-        {
-        colour = 2;
+        //get number values
+        boolean numberFormats = true;
+        try {
+            r = Double.parseDouble(txtRad.getText()) / 2;
+            l = Double.parseDouble(txtLength.getText());
+            q = Integer.parseInt(txtQuantity.getText());
+        } catch (NumberFormatException e) {
+            //display error message
+            numberFormats = false;
         }
         
-        //get check box values
-        insulation = cbxInsulation.isSelected();
-        reinforcement = cbxReinforce.isSelected();
-        chemicalResist = cbxResistant.isSelected();
-        
-        quantity = Integer.parseInt(txtQuantity.getText()); 
+        if (numberFormats) {
+            //set attributes to valid numbers
+            newRadius = r;
+            newLength = l;
+            quantity = q;
+            //get plastic grade
+            newGrade = cmbGrade.getSelectedIndex() + 1;
+            //get radio value
+            if (rdbNone.isSelected()) {
+                colour = 0;
+            } else if (rdbOne.isSelected()) {
+                colour = 1;
+            } else {
+                colour = 2;
+            }
+            //get check box values
+            insulation = cbxInsulation.isSelected();
+            reinforcement = cbxReinforce.isSelected();
+            chemicalResist = cbxResistant.isSelected();
+            return true;
+        } else {
+            return false;
+        }
                
     }
     
-    private void validateInput()
-    {
-        //add validation here
-        
+    private boolean validateInput() {
+        if (quantity < 0 || quantity > 100) {
+            return false;
+        }
+        if (newLength < 0.1 || newLength > 6.0){
+            return false;
+        }
+        return !(newRadius < 0.5 || newRadius > 10.0);
     }
-    
-    private void addToOrder()
-    {
+        
+    private void addToOrder() {
 
     newOrder = new Order(aPipe, quantity);
         
@@ -558,56 +562,39 @@ public class PipeUI extends javax.swing.JFrame {
         clearText();
     }
     
-    private void initPipe(int type)
-    {
+    private void initPipe(int type) {
     switch (type) {
-            case 0:  
-                    aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-                    //JOptionPane.showMessageDialog(null, "Pipe not supplied");
-                    //return;
-            case 1:   aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 2:   aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 3:   aPipe = new Pipe3(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 4:   aPipe = new Pipe4(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 5:   aPipe = new Pipe5(newLength, newRadius, newGrade, chemicalResist);
-                     break;
+            case 1:  aPipe = new Pipe1(newLength, newRadius, newGrade, chemicalResist);
+            case 2:  aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
+            case 3:  aPipe = new Pipe3(newLength, newRadius, newGrade, chemicalResist);
+            case 4:  aPipe = new Pipe4(newLength, newRadius, newGrade, chemicalResist);
+            case 5:  aPipe = new Pipe5(newLength, newRadius, newGrade, chemicalResist);
         }
-    
     }
     
-    private boolean validSelected()
-    {
-     boolean valid = false;
-     int index = lstbxOrder.getSelectedIndex();
-     if(index != -1)
-        {
-           valid = true;
-      }else if(orderList.isEmpty())
-      {
-      msg("You have no items in the list");
-      } else {
-      msg("Please select an item");
-      }
+    private boolean validSelected() {
+        boolean valid = false;
+        int index = lstbxOrder.getSelectedIndex();
+        if (index != -1) {
+            valid = true;
+        } else if (orderList.isEmpty()) {
+            msg("You have no items in the list");
+        } else {
+            msg("Please select an item");
+        }
      
-     return valid;
+        return valid;
     }
     
-    private void groupRadioButtons()
-    {
-    ButtonGroup group = new ButtonGroup();
-    group.add(rdbNone);
-    group.add(rdbOne);
-    group.add(rdbTwo);
+    private void groupRadioButtons() {
+        ButtonGroup group = new ButtonGroup();
+        group.add(rdbNone);
+        group.add(rdbOne);
+        group.add(rdbTwo);
     }
     
-    private void msg(String s)
-    {
-    JOptionPane.showMessageDialog(null, s);
+    private void msg(String s) {
+        JOptionPane.showMessageDialog(null, s);
     }
     
     /**
@@ -639,6 +626,7 @@ public class PipeUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new PipeUI().setVisible(true);
             }

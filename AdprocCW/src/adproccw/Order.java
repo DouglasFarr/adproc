@@ -25,10 +25,10 @@ public class Order {
     }
     
     public String valuesToString() {
+        
         String s;
         
         String cost = new DecimalFormat("0.00").format(getOrderPrice());
-        
         String options = "";
         
         if (orderPipe.isPipeInsulation()) 
@@ -40,12 +40,10 @@ public class Order {
         if (options.isEmpty())
             options = "None, ";
         
-        
-        s = "Plastic Grade: " + orderPipe.getPipeGrade() + " Radius: " + orderPipe.getPipeRadius() +
+        s = "Plastic Grade: " + orderPipe.getPipeGrade() + " Diameter: " + orderPipe.getPipeDiameter() +
                 " Length: " + orderPipe.getPipeLength() + " Colours: " + orderPipe.getPipeColours() +
-                " Options: " + options + " Quantity: "  + " Cost: £" + cost ; 
-                      
-        return s;            
+                " Options: " + options + " Quantity: "  + " Cost: £" + cost ;               
+        return s;
     }
     
     public void setQuantity(int quantity) {
