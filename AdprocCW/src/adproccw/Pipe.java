@@ -69,6 +69,10 @@ public abstract class Pipe {
     public double getPipeRadius() {
         return pipeRadius;
     }
+    
+    public double getPipeDiameter() {
+        return pipeRadius * 2;
+    }
 
     public int getPipeGrade() {
         return pipeGrade;
