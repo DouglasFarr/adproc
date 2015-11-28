@@ -379,10 +379,10 @@ public class PipeUI extends javax.swing.JFrame {
                 }
                 txtQuantity.setText("1");
             } else {
-                System.out.println("Pipe not valid");
+                msg("Your chosen options do not create a pipe of a valid type");
             }
         } else {
-            System.out.println("Inputs not valid");
+            msg("Inputs are invalid");
         }
     }//GEN-LAST:event_btnOrderActionPerformed
 
