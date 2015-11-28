@@ -26,6 +26,7 @@ public class PipeUI extends javax.swing.JFrame {
     private Pipe aPipe;
     private Order newOrder;
     private PipeChecker cPipe = new PipeChecker();
+    
     /**
      * Creates new form PipeUI
      */
@@ -33,6 +34,7 @@ public class PipeUI extends javax.swing.JFrame {
         
         initComponents();
         groupRadioButtons();
+        txtQuantity.setText("1");
        
         ImageIcon img = new ImageIcon("pipes.png");
         
@@ -318,45 +320,41 @@ public class PipeUI extends javax.swing.JFrame {
 
        
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
-     
-  //  try {
-      	
-        getInputs();
-          
-        validateInput(); // empty
         
-        //needs to be added as a method
-      	type = cPipe.check(newGrade, colour, insulation, reinforcement);
-
-      	initPipe(type);        //initialize the type pipe  
-
-        newOrder = new Order(aPipe, quantity);
+        boolean valid = false;
         
+        if (getInputs()) {
+            //System.out.println("Inputs good");
+            valid = validateInput();
+            //System.out.println("Inputs valid: " + valid);
+        }
         
-       
-        cost = new DecimalFormat("0.00").format(newOrder.getOrderPrice());
-        
-      	//sets lable.... needed? *********************************************************************************************
-      	lblCost.setText(String.valueOf(cost));
+        if (valid) {
+            type = cPipe.check(newGrade, colour, insulation, reinforcement);
+            if (!(type < 1 || type > 5)) { 
+                initPipe(type);        //initialize the type pipe
+                newOrder = new Order(aPipe , quantity);
+                cost = new DecimalFormat("0.00").format(newOrder.getOrderPrice());
 
-      	//Yes or no option message box asked if theyd like to add to order
-      	JDialog.setDefaultLookAndFeelDecorated(true);
-      	int response = JOptionPane.showConfirmDialog(null, "You require a type " + type + ". This pipe costs £" + cost +
-      		". Would you like to add to order?", "Add to order",
-      	JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                //sets lable.... needed? 
+                //probably not
+                //lblCost.setText(String.valueOf(cost));
 
-      	if (response == JOptionPane.YES_OPTION) {
+                //Yes or no option message box asked if theyd like to add to order
+                JDialog.setDefaultLookAndFeelDecorated(true);
+                int response = JOptionPane.showConfirmDialog(null, "You require a type " + type + ". This pipe costs £" + cost +
+                        ". Would you like to add to order?", "Add to order",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-      	    addToOrder();
-
-      	}
-
-
-//      } catch (Exception exRef) {
-//      	//catch block, or exception handler 
-//      	JOptionPane.showMessageDialog(null, exRef);
-//      }
-    
+                if (response == JOptionPane.YES_OPTION) {
+                    addToOrder();
+                }
+            } else {
+                System.out.println("Pipe not valid");
+            }
+        } else {
+            System.out.println("Inputs not valid");
+        }
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
@@ -443,8 +441,7 @@ public class PipeUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BtnTablesActionPerformed
 
-    private void clearText()
-    { 
+    private void clearText() { 
         cmbGrade.setSelectedIndex(0);
         txtLength.setText(""); 
         txtRad.setText("");
@@ -459,8 +456,7 @@ public class PipeUI extends javax.swing.JFrame {
         rdbNone.setSelected(true);
     }
     
-    private void updateTotal()
-    {
+    private void updateTotal() {
         total = 0;
         
         //for each pipe in list add the price 
@@ -476,44 +472,59 @@ public class PipeUI extends javax.swing.JFrame {
         lblTotal.setText(totalCost);
     }
     
-    private void getInputs()
-    {
-    
-     //convert to correct type from string
-        newGrade = cmbGrade.getSelectedIndex() + 1; //  cmbGrade.getSelectedItem(); 
-         
-        newRadius = Double.parseDouble(txtRad.getText()); 
-        newLength = Double.parseDouble(txtLength.getText()); 
+    private boolean getInputs() {
         
-        if (rdbNone.isSelected())
-        { colour = 0;
+        double r = 0, l = 0;
+        int q = 0;
         
-        }else if (rdbOne.isSelected())
-        {
-        colour = 1;
-        }
-        else
-        {
-        colour = 2;
+        //get number values
+        boolean numberFormats = true;
+        try {
+            r = Double.parseDouble(txtRad.getText()) / 2;
+            l = Double.parseDouble(txtLength.getText());
+            q = Integer.parseInt(txtQuantity.getText());
+        } catch (NumberFormatException e) {
+            //display error message
+            numberFormats = false;
         }
         
-        //get check box values
-        insulation = cbxInsulation.isSelected();
-        reinforcement = cbxReinforce.isSelected();
-        chemicalResist = cbxResistant.isSelected();
-        
-        quantity = Integer.parseInt(txtQuantity.getText()); 
+        if (numberFormats) {
+            //set attributes to valid numbers
+            newRadius = r;
+            newLength = l;
+            quantity = q;
+            //get plastic grade
+            newGrade = cmbGrade.getSelectedIndex() + 1;
+            //get radio value
+            if (rdbNone.isSelected()) {
+                colour = 0;
+            } else if (rdbOne.isSelected()) {
+                colour = 1;
+            } else {
+                colour = 2;
+            }
+            //get check box values
+            insulation = cbxInsulation.isSelected();
+            reinforcement = cbxReinforce.isSelected();
+            chemicalResist = cbxResistant.isSelected();
+            return true;
+        } else {
+            return false;
+        }
                
     }
     
-    private void validateInput()
-    {
-        //add validation here
-        
+    private boolean validateInput() {
+        if (quantity < 0 || quantity > 100) {
+            return false;
+        }
+        if (newLength < 0.1 || newLength > 6.0){
+            return false;
+        }
+        return !(newRadius < 0.5 || newRadius > 10.0);
     }
-    
-    private void addToOrder()
-    {
+        
+    private void addToOrder() {
 
     newOrder = new Order(aPipe, quantity);
         
@@ -530,56 +541,39 @@ public class PipeUI extends javax.swing.JFrame {
         clearText();
     }
     
-    private void initPipe(int type)
-    {
+    private void initPipe(int type) {
     switch (type) {
-            case 0:  
-                    aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-                    //JOptionPane.showMessageDialog(null, "Pipe not supplied");
-                    //return;
-            case 1:   aPipe =  new Pipe1(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 2:   aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 3:   aPipe = new Pipe3(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 4:   aPipe = new Pipe4(newLength, newRadius, newGrade, chemicalResist);
-                     break;
-            case 5:   aPipe = new Pipe5(newLength, newRadius, newGrade, chemicalResist);
-                     break;
+            case 1:  aPipe = new Pipe1(newLength, newRadius, newGrade, chemicalResist);
+            case 2:  aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
+            case 3:  aPipe = new Pipe3(newLength, newRadius, newGrade, chemicalResist);
+            case 4:  aPipe = new Pipe4(newLength, newRadius, newGrade, chemicalResist);
+            case 5:  aPipe = new Pipe5(newLength, newRadius, newGrade, chemicalResist);
         }
-    
     }
     
-    private boolean validSelected()
-    {
-     boolean valid = false;
-     int index = lstbxOrder.getSelectedIndex();
-     if(index != -1)
-        {
-           valid = true;
-      }else if(orderList.isEmpty())
-      {
-      msg("You have no items in the list");
-      } else {
-      msg("Please select an item");
-      }
+    private boolean validSelected() {
+        boolean valid = false;
+        int index = lstbxOrder.getSelectedIndex();
+        if (index != -1) {
+            valid = true;
+        } else if (orderList.isEmpty()) {
+            msg("You have no items in the list");
+        } else {
+            msg("Please select an item");
+        }
      
-     return valid;
+        return valid;
     }
     
-    private void groupRadioButtons()
-    {
-    ButtonGroup group = new ButtonGroup();
-    group.add(rdbNone);
-    group.add(rdbOne);
-    group.add(rdbTwo);
+    private void groupRadioButtons() {
+        ButtonGroup group = new ButtonGroup();
+        group.add(rdbNone);
+        group.add(rdbOne);
+        group.add(rdbTwo);
     }
     
-    private void msg(String s)
-    {
-    JOptionPane.showMessageDialog(null, s);
+    private void msg(String s) {
+        JOptionPane.showMessageDialog(null, s);
     }
     
     /**
@@ -611,6 +605,7 @@ public class PipeUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new PipeUI().setVisible(true);
             }
