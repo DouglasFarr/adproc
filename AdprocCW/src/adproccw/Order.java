@@ -29,10 +29,21 @@ public class Order {
         
         String cost = new DecimalFormat("0.00").format(getOrderPrice());
         
-        s = "Pipe grade: " + orderPipe.getPipeGrade() + " Radius: " + orderPipe.getPipeRadius() +
-                " Length: " + orderPipe.getPipeLength() + " colours: " + orderPipe.getPipeColours() + 
-                " Insulation: " + orderPipe.isPipeInsulation() + " Reinforcement: " + orderPipe.isPipeReinforcement() +
-                " ChemicalRes: " + orderPipe.isPipeChemicalRes()+ " quantity: "  + " cost: £" + cost ; 
+        String options = "";
+        
+        if (orderPipe.isPipeInsulation()) 
+            {options += "Insulation, ";}
+        if (orderPipe.isPipeReinforcement())
+            {options += "Reinforcement, ";}
+        if (orderPipe.isPipeChemicalRes()) 
+            {options += "Chemical Resistance, ";} 
+        if (options.isEmpty())
+            options = "None, ";
+        
+        
+        s = "Plastic Grade: " + orderPipe.getPipeGrade() + " Radius: " + orderPipe.getPipeRadius() +
+                " Length: " + orderPipe.getPipeLength() + " Colours: " + orderPipe.getPipeColours() +
+                " Options: " + options + " Quantity: "  + " Cost: £" + cost ; 
                       
         return s;            
     }

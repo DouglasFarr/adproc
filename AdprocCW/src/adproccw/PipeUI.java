@@ -470,7 +470,10 @@ public class PipeUI extends javax.swing.JFrame {
         }
  
         //updates lable
-        lblTotal.setText(String.valueOf(total));
+        
+        String totalCost = new DecimalFormat("0.00").format(total);
+        
+        lblTotal.setText(totalCost);
     }
     
     private void getInputs()
