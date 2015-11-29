@@ -355,14 +355,10 @@ public class PipeUI extends javax.swing.JFrame {
             valid = validateInput();
             if (valid) {
                 type = cPipe.check(newGrade, colour, insulation, reinforcement);
-                if (!(type < 1 || type > 5)) { 
+                if (!(type < 1 || type > 5)) { //********************************* if not 0 better?
                     initPipe(type);        //initialize the type pipe
                     newOrder = new Order(aPipe , quantity);
                     cost = new DecimalFormat("0.00").format(newOrder.getOrderPrice());
-
-                    //sets lable.... needed? 
-                    //probably not
-                    //lblCost.setText(String.valueOf(cost));
 
                     //Yes or no option message box asked if theyd like to add to order
                     JDialog.setDefaultLookAndFeelDecorated(true);
@@ -373,7 +369,7 @@ public class PipeUI extends javax.swing.JFrame {
                     if (response == JOptionPane.YES_OPTION) {
                         addToOrder();
                     }
-                    txtQuantity.setText("1");
+                    // txtQuantity.setText("1"); moved to clear. see line 466. caled inside addToOrder();
                 } else {
                     msg("Your chosen options do not create a pipe of a valid type");
                 }
@@ -466,7 +462,8 @@ public class PipeUI extends javax.swing.JFrame {
         cmbGrade.setSelectedIndex(0);
         txtLength.setText(""); 
         txtRad.setText("");
-        txtQuantity.setText("");
+        //txtQuantity.setText("");
+        txtQuantity.setText("1"); 
         
         //unticks boxes
         cbxInsulation.setSelected(false);
@@ -499,7 +496,7 @@ public class PipeUI extends javax.swing.JFrame {
         int q = 0;
         
         //get number values
-        boolean numberFormats = true;
+        boolean numberFormats = true;  
         try {
             r = Double.parseDouble(txtRad.getText()) / 2;
             l = Double.parseDouble(txtLength.getText());
@@ -542,7 +539,35 @@ public class PipeUI extends javax.swing.JFrame {
         if (newLength < 0.1 || newLength > 6.0){
             return false;
         }
-        return !(newRadius < 0.5 || newRadius > 10.0);
+       return !(newRadius < 0.5 || newRadius > 10.0);
+       
+//        boolean quantityCheck;
+//        boolean lengthCheck;
+//        boolean radiusCheck;
+//        
+//        quantityCheck = rangeCheck("quantity",quantity, 0, 100);
+//        lengthCheck = rangeCheck("Length",newLength, 0.1, 6.0);
+//        radiusCheck = rangeCheck("Radius",newRadius, 0.5, 10.0);
+//        
+//        return(quantityCheck & lengthCheck & radiusCheck);
+     
+    }
+    
+    private boolean rangeCheck(String name,double testValue, double min, double max)
+    {
+     String message = name + " ";
+     if (testValue < min) {
+            message += "Is to small. must be atleast " + min; 
+            return false;
+        }else if  (testValue > max)
+        {
+        message += "Is to Big. must be less than " + max; 
+        }else 
+        {
+        return true; 
+        }
+      msg(message);  
+     return false;
     }
         
     private void addToOrder() {
