@@ -85,6 +85,7 @@ public class PipeUI extends javax.swing.JFrame {
         jLabel5.setText("Total: £");
 
         lblTotal.setText("0");
+        lblTotal.setToolTipText("Total cost");
         lblTotal.setName("lblCost"); // NOI18N
 
         BtnNew.setText("Reset Order");
@@ -111,7 +112,7 @@ public class PipeUI extends javax.swing.JFrame {
             }
         });
 
-        BtnTables.setText("View Charts");
+        BtnTables.setText("Info");
         BtnTables.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTablesActionPerformed(evt);
@@ -120,7 +121,6 @@ public class PipeUI extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        txtLength.setToolTipText("Hello");
         txtLength.setName("txtLength"); // NOI18N
 
         txtRad.setName("txtRad"); // NOI18N
@@ -150,10 +150,13 @@ public class PipeUI extends javax.swing.JFrame {
 
         rdbNone.setSelected(true);
         rdbNone.setText("None");
+        rdbNone.setToolTipText("No additional costs.");
 
         rdbOne.setText("One");
+        rdbOne.setToolTipText("12% extra cost");
 
         rdbTwo.setText("Two");
+        rdbTwo.setToolTipText("17% extra cost");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -182,10 +185,13 @@ public class PipeUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
 
         cbxInsulation.setText("Insulation");
+        cbxInsulation.setToolTipText("14% extra cost");
 
         cbxReinforce.setText("Reinforcement");
+        cbxReinforce.setToolTipText("15% extra cost");
 
         cbxResistant.setText("Chemical Resistance");
+        cbxResistant.setToolTipText("12% extra cost");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,16 +240,16 @@ public class PipeUI extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(30, 30, 30)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtLength)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
                                                 .addComponent(cmbGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(txtLength)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtRad, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGap(0, 0, Short.MAX_VALUE))))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(btnOrder)))
@@ -298,24 +304,22 @@ public class PipeUI extends javax.swing.JFrame {
                         .addComponent(btnRemove)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BtnEdit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTotal)
                         .addGap(41, 41, 41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lstbxOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(BtnTables)
-                                .addGap(18, 18, 18)
-                                .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lstbxOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(BtnTables, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -332,6 +336,7 @@ public class PipeUI extends javax.swing.JFrame {
                             .addComponent(BtnTables)
                             .addComponent(BtnNew))
                         .addGap(18, 18, 18)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -345,7 +350,7 @@ public class PipeUI extends javax.swing.JFrame {
                             .addComponent(BtnEdit)
                             .addComponent(jLabel5)
                             .addComponent(lblTotal))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -385,6 +390,16 @@ public class PipeUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
+
+        
+        JDialog.setDefaultLookAndFeelDecorated(true);
+                    int response = JOptionPane.showConfirmDialog(null, "Are you sure you"
+                            + " would like to reset? All Orders will be lost.", "Reset",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                    if (response == JOptionPane.YES_OPTION) {
+                       
+                    
         
         //clears inputs
         clearText();
@@ -398,6 +413,7 @@ public class PipeUI extends javax.swing.JFrame {
         
         txtQuantity.setText("1");
        
+                    }
     }//GEN-LAST:event_BtnNewActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed

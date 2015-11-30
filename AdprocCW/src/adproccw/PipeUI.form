@@ -41,29 +41,25 @@
                       <Component id="btnRemove" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BtnEdit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="114" max="32767" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblTotal" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="BtnTables" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="BtnNew" min="-2" pref="95" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Component id="lstbxOrder" min="-2" pref="274" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lstbxOrder" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnTables" min="-2" pref="95" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="BtnNew" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -88,9 +84,10 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -104,7 +101,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,6 +117,7 @@
     <Component class="javax.swing.JLabel" name="lblTotal">
       <Properties>
         <Property name="text" type="java.lang.String" value="0"/>
+        <Property name="toolTipText" type="java.lang.String" value="Total cost"/>
         <Property name="name" type="java.lang.String" value="lblCost" noResource="true"/>
       </Properties>
     </Component>
@@ -157,7 +155,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnTables">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View Charts"/>
+        <Property name="text" type="java.lang.String" value="Info"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTablesActionPerformed"/>
@@ -196,19 +194,19 @@
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="txtRad" min="-2" pref="54" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="txtLength" max="32767" attributes="0"/>
                                               <Group type="102" attributes="0">
                                                   <Component id="cmbGrade" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
-                                              <Component id="txtLength" max="32767" attributes="0"/>
                                           </Group>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="txtRad" min="-2" pref="54" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -261,7 +259,6 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtLength">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Hello"/>
             <Property name="name" type="java.lang.String" value="txtLength" noResource="true"/>
           </Properties>
         </Component>
@@ -360,16 +357,19 @@
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="None"/>
+                <Property name="toolTipText" type="java.lang.String" value="No additional costs."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdbOne">
               <Properties>
                 <Property name="text" type="java.lang.String" value="One"/>
+                <Property name="toolTipText" type="java.lang.String" value="12% extra cost"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdbTwo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Two"/>
+                <Property name="toolTipText" type="java.lang.String" value="17% extra cost"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -415,16 +415,19 @@
             <Component class="javax.swing.JCheckBox" name="cbxInsulation">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Insulation"/>
+                <Property name="toolTipText" type="java.lang.String" value="14% extra cost"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="cbxReinforce">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reinforcement"/>
+                <Property name="toolTipText" type="java.lang.String" value="15% extra cost"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="cbxResistant">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Chemical Resistance"/>
+                <Property name="toolTipText" type="java.lang.String" value="12% extra cost"/>
               </Properties>
             </Component>
           </SubComponents>
