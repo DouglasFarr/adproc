@@ -20,7 +20,7 @@ public abstract class Pipe {
     
     private double pipePrice;
     
-    private double priceMultiplier = 0;
+    protected double priceMultiplier;
             
     /**
      * Creates a new pipe
@@ -42,7 +42,6 @@ public abstract class Pipe {
         pipeInsulation = insulation;
         pipeReinforcement = reinforcement;
         pipeChemicalRes = chemicalResist;
-        calcPrice();
         System.out.println("pipe price" + pipePrice);
     }
     
@@ -56,7 +55,8 @@ public abstract class Pipe {
                         - (Math.PI * Math.pow(innerRadius, 2.0));
         double pipeLengthI = pipeLength * 39.37;
         double basicPrice = pipeArea * pipeLengthI * prices[pipeGrade-1];
-                System.out.println("basic Price" + basicPrice);
+        System.out.println("basic Price: " + basicPrice);
+        System.out.println("Multiplier: " + priceMultiplier);
         pipePrice = basicPrice + (basicPrice * priceMultiplier);
         if (pipeChemicalRes)
             pipePrice += basicPrice * 0.12; 
@@ -98,6 +98,7 @@ public abstract class Pipe {
      * @return price
      */
     public double getPrice () {
+        calcPrice();
         return pipePrice;
     }
    
