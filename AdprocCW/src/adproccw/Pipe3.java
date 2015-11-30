@@ -8,7 +8,7 @@ package adproccw;
  */
 public class Pipe3 extends Pipe{
     
-    private double priceMultiplier = 0.17;
+    //protected double priceMultiplier = 0.17;
     
     /**
      * 
@@ -19,5 +19,6 @@ public class Pipe3 extends Pipe{
      */
     public Pipe3(double length, double radius, int grade, boolean chemicalResist) {
         super(length, radius, grade, 2, false, false, chemicalResist);
+        priceMultiplier = 0.17;
     }
 }

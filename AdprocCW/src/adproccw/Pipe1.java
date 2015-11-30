@@ -18,5 +18,6 @@ public class Pipe1 extends Pipe {
      */
     public Pipe1(double length, double radius, int grade, boolean chemicalResist) {
         super(length, radius, grade, 0, false, false, chemicalResist);
+        priceMultiplier = 0;
     }
 }
