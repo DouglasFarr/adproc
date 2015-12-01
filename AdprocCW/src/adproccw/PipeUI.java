@@ -19,14 +19,14 @@ import java.text.DecimalFormat;
 public class PipeUI extends javax.swing.JFrame {
 
     
-    private  ArrayList<Order> orderList = new ArrayList<Order>(); 
+    private final  ArrayList<Order> orderList = new ArrayList<>(); 
     private double total, newLength, newRadius;
     private String cost;
     private int newGrade, type, colour, quantity;  
     private  boolean insulation, reinforcement, chemicalResist;
     private Pipe aPipe;
     private Order newOrder;
-    private PipeChecker cPipe = new PipeChecker();
+    private final PipeChecker cPipe = new PipeChecker();
     
     /**
      * Creates new form PipeUI
@@ -359,8 +359,6 @@ public class PipeUI extends javax.swing.JFrame {
        
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         
-        boolean valid = false;
-        
         if (getInputs()) {           
             if (validInput()) {
                 type = cPipe.check(newGrade, colour, insulation, reinforcement);
@@ -378,7 +376,6 @@ public class PipeUI extends javax.swing.JFrame {
                     if (response == JOptionPane.YES_OPTION) {
                         addToOrder();
                     }
-                    // txtQuantity.setText("1"); moved to clear. see line 466. caled inside addToOrder();
                 } else {
                     msg("Your chosen options do not create a pipe of a valid type");
                 }

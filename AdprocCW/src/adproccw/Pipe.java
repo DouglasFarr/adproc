@@ -9,15 +9,15 @@ package adproccw;
  */
 public abstract class Pipe {
     
-    private double pipeLength; //in meters, volume calculations are in inches;
+    private final double pipeLength; //in meters, volume calculations are in inches;
     //1 inch = 0.0254 meters
     //1 meter = 39.37 inches
-    private double pipeRadius; //in inches
-    private int pipeGrade;
-    private int pipeColours;
-    private boolean pipeInsulation;
-    private boolean pipeReinforcement;
-    private boolean pipeChemicalRes;
+    private final double pipeRadius; //in inches
+    private final int pipeGrade;
+    private final int pipeColours;
+    private final boolean pipeInsulation;
+    private final boolean pipeReinforcement;
+    private final boolean pipeChemicalRes;
     
     private double pipePrice;
     
@@ -43,7 +43,6 @@ public abstract class Pipe {
         pipeInsulation = insulation;
         pipeReinforcement = reinforcement;
         pipeChemicalRes = chemicalResist;
-        System.out.println("pipe price" + pipePrice);
     }
     
     /**
@@ -56,8 +55,8 @@ public abstract class Pipe {
                         - (Math.PI * Math.pow(innerRadius, 2.0));
         double pipeLengthI = pipeLength * 39.37;
         double basicPrice = pipeArea * pipeLengthI * prices[pipeGrade-1];
-        System.out.println("basic Price: " + basicPrice);
-        System.out.println("Multiplier: " + priceMultiplier);
+        //System.out.println("basic Price: " + basicPrice);
+        //System.out.println("Multiplier: " + priceMultiplier);
         pipePrice = basicPrice + (basicPrice * priceMultiplier);
         if (pipeChemicalRes)
             pipePrice += basicPrice * 0.12; 
