@@ -319,7 +319,7 @@ public class PipeUI extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(BtnTables, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
-                        .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -336,7 +336,6 @@ public class PipeUI extends javax.swing.JFrame {
                             .addComponent(BtnTables)
                             .addComponent(BtnNew))
                         .addGap(18, 18, 18)))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -350,7 +349,7 @@ public class PipeUI extends javax.swing.JFrame {
                             .addComponent(BtnEdit)
                             .addComponent(jLabel5)
                             .addComponent(lblTotal))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -361,8 +360,7 @@ public class PipeUI extends javax.swing.JFrame {
         
         boolean valid = false;
         
-        if (getInputs()) {
-           
+        if (getInputs()) {           
             if (validInput()) {
                 type = cPipe.check(newGrade, colour, insulation, reinforcement);
                 if (type != 0) {  
@@ -384,8 +382,6 @@ public class PipeUI extends javax.swing.JFrame {
                     msg("Your chosen options do not create a pipe of a valid type");
                 }
             } 
-        } else {
-            msg("Inputs are of an invalid type. Make sure to use numeric values");
         }
     }//GEN-LAST:event_btnOrderActionPerformed
 
@@ -519,10 +515,22 @@ public class PipeUI extends javax.swing.JFrame {
         boolean numberFormats = true;  
         try {
             r = Double.parseDouble(txtRad.getText()) / 2;
+        } catch (NumberFormatException e) {
+            msg("Diameter should be a numeric value");
+            numberFormats = false;
+        }
+        
+        try {
             l = Double.parseDouble(txtLength.getText());
+        } catch (NumberFormatException e) {
+            msg("Length should be a numeric value");
+            numberFormats = false;
+        }
+        
+        try {
             q = Integer.parseInt(txtQuantity.getText());
         } catch (NumberFormatException e) {
-            //display error message
+            msg("Quantity should be an integer value");
             numberFormats = false;
         }
         
@@ -548,8 +556,7 @@ public class PipeUI extends javax.swing.JFrame {
             return true;
         } else {
             return false;
-        }
-               
+        }     
     }
     
     private boolean validInput() {
@@ -558,30 +565,26 @@ public class PipeUI extends javax.swing.JFrame {
         boolean lengthCheck;
         boolean radiusCheck;
         
-        lengthCheck = rangeCheck("Length",newLength, 0.1, 6.0);
-        radiusCheck = rangeCheck("Diameter",newRadius*2, 1, 20.0);
-        quantityCheck = rangeCheck("quantity",quantity, 1, 100);
+        lengthCheck = rangeCheck("Length", newLength, 0.1, 6.0);
+        radiusCheck = rangeCheck("Diameter", newRadius*2, 1, 20.0);
+        quantityCheck = rangeCheck("Quantity", quantity, 1, 100);
         
         return(quantityCheck & lengthCheck & radiusCheck);
     }
     
-    private boolean rangeCheck(String name,double testValue, double min, double max)
-    {
-     String message = name + " ";
-     if (testValue < min) {
-            message += "is to small. must be atleast " + min; 
-            
-        }else if  (testValue > max)
-        {
-            message += "is to big. must be less than " + max; 
+    private boolean rangeCheck(String name,double testValue, double min, double max) {
         
-        }else 
-        {
-        return true; 
+        String message = name + " ";
+        if (testValue < min) {
+            message += "is to small. must be atleast " + min;             
+        } else if  (testValue > max) {
+            message += "is to big. must be less than " + max; 
+        } else {
+            return true; 
         }
      
-     msg(message);  
-     return false;
+        msg(message);  
+        return false;
     }
         
     private void addToOrder() {
