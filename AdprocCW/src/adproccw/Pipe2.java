@@ -1,16 +1,16 @@
-/*
- */
+
 package adproccw;
 
 /**
- *
- * @author jtayl
+ * Type 2 Pipe
+ * 
+ * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <>
  */
 public class Pipe2 extends Pipe {
     
-    //protected double priceMultiplier = 0.12;
     
     /**
+     * Creates a new Type 2 Pipe
      * 
      * @param length
      * @param radius

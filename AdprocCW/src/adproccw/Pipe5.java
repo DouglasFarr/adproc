@@ -1,16 +1,16 @@
-/*
- */
+
 package adproccw;
 
 /**
- *
- * @author jtayl
+ * Type 5 Pipe
+ * 
+ * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <>
  */
 public class Pipe5 extends Pipe {
     
-    //double priceMultiplier = 0.46;
 
     /**
+     * Creates a new Type 5 Pipe
      * 
      * @param length
      * @param radius

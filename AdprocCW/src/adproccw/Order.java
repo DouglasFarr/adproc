@@ -1,12 +1,12 @@
-/*
- */
+
 package adproccw;
 
 import java.text.DecimalFormat;
 
 /**
- *
- * @author James Taylor <up368574@myport.ac.uk>
+ * An order, contains a pipe and a quantity
+ * 
+ * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <>
  */
 public class Order {
     
@@ -24,10 +24,13 @@ public class Order {
         orderQuantity = quantity;
     }
     
+    /**
+     * 
+     * @return string with pipe details
+     */
     public String valuesToString() {
         
         String s;
-        
         String cost = new DecimalFormat("0.00").format(getOrderPrice());
         String options = "";
         
@@ -46,34 +49,53 @@ public class Order {
         return s;
     }
     
+    /**
+     * sets quantity
+     * @param quantity 
+     */
     public void setQuantity(int quantity) {
         orderQuantity = quantity;
     }
     
+    /**
+     * 
+     * @return quantity 
+     */
     public int getQuantity() {
         return orderQuantity;
     }
     
+    /**
+     * sets a new pipe
+     * @param pipe 
+     */
     public void setPipe(Pipe pipe) {
         orderPipe = pipe;
     }
     
+    /**
+     * 
+     * @return Pipe
+     */
     public Pipe getPipe() {
         return orderPipe;
     }
 
+    /**
+     * 
+     * @return price of pipe
+     */
     public double getPipePrice() {
         return orderPipe.getPrice();
     }
     
+    /**
+     * 
+     * @return price of entire order
+     */
     public double getOrderPrice() {
-       
-        
         double x = orderPipe.getPrice() *  orderQuantity;
-        
-        return (x);
-          
-                
+        return (x);      
     }
     
 }

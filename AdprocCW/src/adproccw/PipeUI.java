@@ -1,5 +1,4 @@
-/*
- */
+
 package adproccw;
 
 import javax.swing.JOptionPane;
@@ -11,9 +10,11 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.text.DecimalFormat;
+
 /**
- *
- * @author Compaq
+ * Main UI Class
+ * 
+ * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <> 
  */
 public class PipeUI extends javax.swing.JFrame {
 
@@ -364,7 +365,7 @@ public class PipeUI extends javax.swing.JFrame {
             if (validInput()) {
                 type = cPipe.check(newGrade, colour, insulation, reinforcement);
                 if (type != 0) {  
-                    initPipe(type);        //initialize the type pipe
+                    initPipe(type);        //initialize the correct pipe
                     newOrder = new Order(aPipe , quantity);
                     cost = new DecimalFormat("0.00").format(newOrder.getOrderPrice());
 
@@ -387,34 +388,28 @@ public class PipeUI extends javax.swing.JFrame {
 
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
 
-        
         JDialog.setDefaultLookAndFeelDecorated(true);
-                    int response = JOptionPane.showConfirmDialog(null, "Are you sure you"
-                            + " would like to reset? All Orders will be lost.", "Reset",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int response = JOptionPane.showConfirmDialog(null, "Are you sure you"
+        + " would like to reset? All Orders will be lost.", "Reset",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-                    if (response == JOptionPane.YES_OPTION) {
-                       
-                    
-        
-        //clears inputs
-        clearText();
-        
-        //empties lists
-        lstbxOrder.removeAll(); 
-        orderList.clear();
-         
-        //resets lables
-        lblTotal.setText("0");
-        
-        txtQuantity.setText("1");
-       
-                    }
+        if (response == JOptionPane.YES_OPTION) {
+            //clears inputs
+            clearText();
+
+            //empties lists
+            lstbxOrder.removeAll(); 
+            orderList.clear();
+
+            //resets lables
+            lblTotal.setText("0");
+            txtQuantity.setText("1");
+        }
     }//GEN-LAST:event_BtnNewActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         
-        //gets se;ected item
+        //gets selected item
         int index = lstbxOrder.getSelectedIndex();
         
         // if an item is slected remove it 
@@ -454,10 +449,7 @@ public class PipeUI extends javax.swing.JFrame {
             cbxResistant.setSelected(xPipe.isPipeChemicalRes());
 
             btnRemove.doClick();
-        
-        
         }   
-        
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnTablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTablesActionPerformed
@@ -468,13 +460,13 @@ public class PipeUI extends javax.swing.JFrame {
             JLabel label = new JLabel(icon);
             JOptionPane.showMessageDialog(null, label);
         } catch (Exception exRef) {
-      	//catch block, or exception handler 
-      	JOptionPane.showMessageDialog(null, exRef);
-      }
-        
+            //catch block, or exception handler 
+            JOptionPane.showMessageDialog(null, exRef);
+        } 
     }//GEN-LAST:event_BtnTablesActionPerformed
 
-    private void clearText() { 
+    private void clearText() {
+        
         cmbGrade.setSelectedIndex(0);
         txtLength.setText(""); 
         txtRad.setText("");
@@ -491,18 +483,16 @@ public class PipeUI extends javax.swing.JFrame {
     }
     
     private void updateTotal() {
+        
         total = 0;
         
         //for each pipe in list add the price 
-        for(Order aOrder:  orderList)
-        { 
+        for(Order aOrder:  orderList){ 
            total += aOrder.getOrderPrice();
         }
  
         //updates lable
-        
         String totalCost = new DecimalFormat("0.00").format(total);
-        
         lblTotal.setText(totalCost);
     }
     
@@ -519,14 +509,12 @@ public class PipeUI extends javax.swing.JFrame {
             msg("Diameter should be a numeric value");
             numberFormats = false;
         }
-        
         try {
             l = Double.parseDouble(txtLength.getText());
         } catch (NumberFormatException e) {
             msg("Length should be a numeric value");
             numberFormats = false;
         }
-        
         try {
             q = Integer.parseInt(txtQuantity.getText());
         } catch (NumberFormatException e) {
@@ -589,23 +577,19 @@ public class PipeUI extends javax.swing.JFrame {
         
     private void addToOrder() {
 
-    newOrder = new Order(aPipe, quantity);
-        
-    orderList.add(newOrder);
-        
+        newOrder = new Order(aPipe, quantity);
+        orderList.add(newOrder);
+
         updateTotal();
-       
-        String lstEntry;
-        // list item
+        String lstEntry;    // list item
         lstEntry = ("Type:" + type + " " + newOrder.valuesToString());
-        
         lstbxOrder.add(lstEntry); // adds to list
-        
         clearText();
     }
     
     private void initPipe(int type) {
-    switch (type) {
+        
+        switch (type) {
             case 1:     aPipe = new Pipe1(newLength, newRadius, newGrade, chemicalResist);
                         break;
             case 2:     aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
@@ -620,6 +604,7 @@ public class PipeUI extends javax.swing.JFrame {
     }
     
     private boolean validSelected() {
+        
         boolean valid = false;
         int index = lstbxOrder.getSelectedIndex();
         if (index != -1) {

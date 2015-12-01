@@ -1,15 +1,16 @@
-/*
- */
+
 package adproccw;
 
 /**
- *
- * @author jtayl
+ * Type 1 Pipe
+ * 
+ * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <>
  */
 public class Pipe1 extends Pipe {
     
     
     /**
+     * Creates a new Type 1 Pipe
      * 
      * @param length
      * @param radius

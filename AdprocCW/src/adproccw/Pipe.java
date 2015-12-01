@@ -2,9 +2,10 @@
 package adproccw;
 
 /**
- * The pipe object
+ * The abstract pipe object
+ * Superclass for all other Pipes
  * 
- * @author James Taylor <up368574@myport.ac.uk>
+ * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <>
  */
 public abstract class Pipe {
     
@@ -34,7 +35,7 @@ public abstract class Pipe {
      * @param chemicalResist chemical resistance
      */
     public Pipe (double length, double radius, int grade, int colours, 
-            boolean insulation, boolean reinforcement, boolean chemicalResist){
+            boolean insulation, boolean reinforcement, boolean chemicalResist) {
         pipeLength = length;
         pipeRadius = radius;
         pipeGrade = grade;
@@ -61,40 +62,73 @@ public abstract class Pipe {
         if (pipeChemicalRes)
             pipePrice += basicPrice * 0.12; 
     }
-
+    
+    /**
+     * 
+     * @return pipe length
+     */
     public double getPipeLength() {
         return pipeLength;
     }
-
+    
+    /**
+     * 
+     * @return pipe radius
+     */
     public double getPipeRadius() {
         return pipeRadius;
     }
     
+    /**
+     * 
+     * @return pipe diameter
+     */
     public double getPipeDiameter() {
         return pipeRadius * 2;
     }
 
+    /**
+     * 
+     * @return plastic grade 
+     */
     public int getPipeGrade() {
         return pipeGrade;
     }
 
+    /**
+     * 
+     * @return number of colours
+     */
     public int getPipeColours() {
         return pipeColours;
     }
 
+    /**
+     * 
+     * @return true if insulated
+     */
     public boolean isPipeInsulation() {
         return pipeInsulation;
     }
 
+    /**
+     * 
+     * @return true if reinforced 
+     */
     public boolean isPipeReinforcement() {
         return pipeReinforcement;
     }
 
+    /**
+     * 
+     * @return true if chemical resistant
+     */
     public boolean isPipeChemicalRes() {
         return pipeChemicalRes;
     }
     
     /**
+     * 
      * @return price
      */
     public double getPrice () {

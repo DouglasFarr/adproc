@@ -1,31 +1,22 @@
-/*
- */
+
 package adproccw;
 
 /**
- *
- * @author James Taylor <up368574@myport.ac.uk>
+ * An object to validate pipes
+ * 
+ * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <>
  */
 public class PipeChecker {
     
     
     /**
-     * Can be used to validate pipes
+     * Creates a new object to validate pipes
      */
     public PipeChecker() {}
         
-/*
-    private boolean checkMeasures(double length, double radius) {
-        if (length < 0.1 || length > 6.0)
-            return false;
-        if (radius < 1.0 || radius > 10.0)
-            return false;
-        else
-            return true;
-    }
-*/
     
     /**
+     * Checks if options make a pipe of a valid type
      * 
      * @param grade
      * @param colours

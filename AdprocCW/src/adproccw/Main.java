@@ -3,7 +3,8 @@ package adproccw;
 
 /**
  *
- * @author James Taylor <up368574@myport.ac.uk>
+ * 
+ * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <>
  */
 public class Main {
 
