@@ -432,13 +432,16 @@ public class PipeUI extends javax.swing.JFrame {
             cmbGrade.setSelectedIndex(xPipe.getPipeGrade() -1);
                     
             //getPipeGrade()
-
-            if (xPipe.getPipeColours()==0) {
-                rdbNone.setSelected(true);
-            } else if (xPipe.getPipeColours()==1) {
-                rdbOne.setSelected(true);
-            } else {
-                rdbTwo.setSelected(true);
+            switch (xPipe.getPipeColours()) {
+                case 0:
+                    rdbNone.setSelected(true);
+                    break;
+                case 1:
+                    rdbOne.setSelected(true);
+                    break;
+                default:
+                    rdbTwo.setSelected(true);
+                    break;
             }
 
             cbxInsulation.setSelected(xPipe.isPipeInsulation());
@@ -587,16 +590,21 @@ public class PipeUI extends javax.swing.JFrame {
     private void initPipe(int type) {
         
         switch (type) {
-            case 1:     aPipe = new Pipe1(newLength, newRadius, newGrade, chemicalResist);
-                        break;
-            case 2:     aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
-                        break;
-            case 3:     aPipe = new Pipe3(newLength, newRadius, newGrade, chemicalResist);
-                        break;
-            case 4:     aPipe = new Pipe4(newLength, newRadius, newGrade, chemicalResist);
-                        break;
-            case 5:     aPipe = new Pipe5(newLength, newRadius, newGrade, chemicalResist);
-                        break;
+            case 1:
+                aPipe = new Pipe1(newLength, newRadius, newGrade, chemicalResist);
+                break;
+            case 2:
+                aPipe = new Pipe2(newLength, newRadius, newGrade, chemicalResist);
+                break;
+            case 3:
+                aPipe = new Pipe3(newLength, newRadius, newGrade, chemicalResist);
+                break;
+            case 4:
+                aPipe = new Pipe4(newLength, newRadius, newGrade, chemicalResist);
+                break;
+            case 5:
+                aPipe = new Pipe5(newLength, newRadius, newGrade, chemicalResist);
+                break;
         }
     }
     
