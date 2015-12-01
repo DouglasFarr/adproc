@@ -1,6 +1,7 @@
 
 package adproccw;
 
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import javax.swing.JDialog;
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 /**
@@ -37,7 +39,6 @@ public class PipeUI extends javax.swing.JFrame {
         groupRadioButtons();
         //txtQuantity.setText("1"); Done now in initComponents();
         ImageIcon img = new ImageIcon("pipes.png");
-        
         setIconImage(img.getImage());
         
         }
@@ -459,7 +460,7 @@ public class PipeUI extends javax.swing.JFrame {
             ImageIcon icon = new ImageIcon(myPicture);
             JLabel label = new JLabel(icon);
             JOptionPane.showMessageDialog(null, label);
-        } catch (Exception exRef) {
+        } catch (IOException | HeadlessException exRef) {
             //catch block, or exception handler 
             JOptionPane.showMessageDialog(null, exRef);
         } 
@@ -650,15 +651,11 @@ public class PipeUI extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PipeUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PipeUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PipeUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PipeUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
