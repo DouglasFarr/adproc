@@ -45,7 +45,7 @@ public class Order {
         
         s = "Plastic Grade: " + orderPipe.getPipeGrade() + " Diameter: " + orderPipe.getPipeDiameter() +
                 " Length: " + orderPipe.getPipeLength() + " Colours: " + orderPipe.getPipeColours() +
-                " Options: " + options + " Quantity: "  + " Cost: £" + cost ;               
+                " Options: " + options + " Quantity: " + orderQuantity + " Cost: £" + cost ;               
         return s;
     }
     
