@@ -565,9 +565,9 @@ public class PipeUI extends javax.swing.JFrame {
         
         String message = name + " ";
         if (testValue < min) {
-            message += "is to small. must be atleast " + min;             
+            message += "is to small. Must be atleast " + min;             
         } else if  (testValue > max) {
-            message += "is to big. must be less than " + max; 
+            message += "is to big. Cannot be greater than " + max; 
         } else {
             return true; 
         }
