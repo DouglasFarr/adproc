@@ -4,7 +4,7 @@ package adproccw;
 /**
  * Type 4 Pipe
  * 
- * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <>
+ * @author UP368574 <up368574@myport.ac.uk>, UP730691 <up730691@myport.ac.uk>
  */
 public class Pipe4 extends Pipe {
     

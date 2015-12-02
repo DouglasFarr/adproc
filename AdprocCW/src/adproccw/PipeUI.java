@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
 /**
  * Main UI Class
  * 
- * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <> 
+ * @author UP368574 <up368574@myport.ac.uk>, UP730691 <up730691@myport.ac.uk> 
  */
 public class PipeUI extends javax.swing.JFrame {
 
@@ -37,7 +37,8 @@ public class PipeUI extends javax.swing.JFrame {
         
         initComponents();
         groupRadioButtons();
-        //txtQuantity.setText("1"); Done now in initComponents();
+        
+        //set icon
         ImageIcon img = new ImageIcon("pipes.png");
         setIconImage(img.getImage());
         
@@ -360,8 +361,9 @@ public class PipeUI extends javax.swing.JFrame {
        
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         
-        if (getInputs()) {           
-            if (validInput()) {
+        //if (getInputs()) {           
+            //if (validInput()) {
+            if (getInputs() && validInput()){
                 type = cPipe.check(newGrade, colour, insulation, reinforcement);
                 if (type != 0) {  
                     initPipe(type);        //initialize the correct pipe
@@ -381,11 +383,12 @@ public class PipeUI extends javax.swing.JFrame {
                     msg("Your chosen options do not create a pipe of a valid type");
                 }
             } 
-        }
+       // }
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void BtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNewActionPerformed
-
+        
+        //User verification
         JDialog.setDefaultLookAndFeelDecorated(true);
         int response = JOptionPane.showConfirmDialog(null, "Are you sure you"
         + " would like to reset? All Orders will be lost.", "Reset",
@@ -422,10 +425,12 @@ public class PipeUI extends javax.swing.JFrame {
                 
         int index = lstbxOrder.getSelectedIndex();
         
+        // if an item is slected, add pipe details to input
         if(validSelected() == true) {
             Order xOrder = orderList.get(index);
             Pipe xPipe = xOrder.getPipe();
 
+            //set text boxes
             txtLength.setText(Double.toString(xPipe.getPipeLength()));
             txtRad.setText(Double.toString(xPipe.getPipeDiameter()));
             txtQuantity.setText(Integer.toString(xOrder.getQuantity()));
@@ -445,33 +450,35 @@ public class PipeUI extends javax.swing.JFrame {
                     break;
             }
 
+            //set check boxes
             cbxInsulation.setSelected(xPipe.isPipeInsulation());
             cbxReinforce.setSelected(xPipe.isPipeReinforcement());
             cbxResistant.setSelected(xPipe.isPipeChemicalRes());
-
+            
+            //remove from list
             btnRemove.doClick();
         }   
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnTablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTablesActionPerformed
-       
+       //displays image in message box
         try {
             BufferedImage myPicture = ImageIO.read(new File("JavaCW-Tables.png"));
             ImageIcon icon = new ImageIcon(myPicture);
             JLabel label = new JLabel(icon);
             JOptionPane.showMessageDialog(null, label);
         } catch (IOException | HeadlessException exRef) {
-            //catch block, or exception handler 
+            //exception handler 
             JOptionPane.showMessageDialog(null, exRef);
         } 
     }//GEN-LAST:event_BtnTablesActionPerformed
 
     private void clearText() {
         
+        //sets to default values
         cmbGrade.setSelectedIndex(0);
         txtLength.setText(""); 
         txtRad.setText("");
-        //txtQuantity.setText("");
         txtQuantity.setText("1"); 
         
         //unticks boxes
@@ -499,25 +506,25 @@ public class PipeUI extends javax.swing.JFrame {
     
     private boolean getInputs() {
         
-        double r = 0, l = 0;
-        int q = 0;
+        double rad = 0, len = 0;
+        int quant = 0;
         
-        //get number values
+        //get number values. If invaild type catch and display error. 
         boolean numberFormats = true;  
         try {
-            r = Double.parseDouble(txtRad.getText()) / 2;
+            rad = Double.parseDouble(txtRad.getText()) / 2;
         } catch (NumberFormatException e) {
             msg("Diameter should be a numeric value");
             numberFormats = false;
         }
         try {
-            l = Double.parseDouble(txtLength.getText());
+            len = Double.parseDouble(txtLength.getText());
         } catch (NumberFormatException e) {
             msg("Length should be a numeric value");
             numberFormats = false;
         }
         try {
-            q = Integer.parseInt(txtQuantity.getText());
+            quant = Integer.parseInt(txtQuantity.getText());
         } catch (NumberFormatException e) {
             msg("Quantity should be an integer value");
             numberFormats = false;
@@ -525,9 +532,9 @@ public class PipeUI extends javax.swing.JFrame {
         
         if (numberFormats) {
             //set attributes to valid numbers
-            newRadius = r;
-            newLength = l;
-            quantity = q;
+            newRadius = rad;
+            newLength = len;
+            quantity = quant;
             //get plastic grade
             newGrade = cmbGrade.getSelectedIndex() + 1;
             //get radio value
@@ -550,10 +557,9 @@ public class PipeUI extends javax.swing.JFrame {
     
     private boolean validInput() {
         
-        boolean quantityCheck;
-        boolean lengthCheck;
-        boolean radiusCheck;
+        boolean quantityCheck, lengthCheck, radiusCheck;
         
+        //returns true if in range
         lengthCheck = rangeCheck("Length", newLength, 0.1, 6.0);
         radiusCheck = rangeCheck("Diameter", newRadius*2, 1, 20.0);
         quantityCheck = rangeCheck("Quantity", quantity, 1, 100);
@@ -563,16 +569,17 @@ public class PipeUI extends javax.swing.JFrame {
     
     private boolean rangeCheck(String name,double testValue, double min, double max) {
         
-        String message = name + " ";
+        String errorMsg = name + " ";
         if (testValue < min) {
-            message += "is too small. Must be atleast " + min;             
+            errorMsg += "is too small. Must be at least " + min;             
         } else if  (testValue > max) {
-            message += "is too big. Cannot be greater than " + max; 
+            errorMsg += "is too big. Cannot be greater than " + max; 
         } else {
             return true; 
         }
-     
-        msg(message);  
+        
+        //display message 
+        msg(errorMsg);  
         return false;
     }
         
@@ -589,7 +596,7 @@ public class PipeUI extends javax.swing.JFrame {
     }
     
     private void initPipe(int type) {
-        
+        //initialize pipe
         switch (type) {
             case 1:
                 aPipe = new Pipe1(newLength, newRadius, newGrade, chemicalResist);
@@ -613,6 +620,8 @@ public class PipeUI extends javax.swing.JFrame {
         
         boolean valid = false;
         int index = lstbxOrder.getSelectedIndex();
+        
+        // -1 when nothing selected 
         if (index != -1) {
             valid = true;
         } else if (orderList.isEmpty()) {
@@ -632,6 +641,7 @@ public class PipeUI extends javax.swing.JFrame {
     }
     
     private void msg(String s) {
+        //displays message box 
         JOptionPane.showMessageDialog(null, s);
     }
     

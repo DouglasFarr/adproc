@@ -5,7 +5,7 @@ package adproccw;
  * The abstract pipe object
  * Superclass for all other Pipes
  * 
- * @author James Taylor <up368574@myport.ac.uk>, Douglas Farr <>
+ * @author UP368574 <up368574@myport.ac.uk>, UP730691 <up730691@myport.ac.uk>
  */
 public abstract class Pipe {
     
