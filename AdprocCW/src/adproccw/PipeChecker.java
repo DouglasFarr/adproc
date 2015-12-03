@@ -4,7 +4,7 @@ package adproccw;
 /**
  * An object to validate pipes
  * 
- * @author UP368574 <up368574@myport.ac.uk>, UP730691 <up730691@myport.ac.uk>
+ * @author UP368574, UP730691
  */
 public class PipeChecker {
     
@@ -24,7 +24,9 @@ public class PipeChecker {
      * @param reinforcement
      * @return Type of pipe as integer, 0 if invalid
      */
-    public int check(int grade, int colours, boolean insulation, boolean reinforcement) {
+    public int check(int grade, int colours, boolean insulation, 
+            boolean reinforcement) {
+        
         if (reinforcement) {
             if (check5(grade, colours, insulation))
                 return 5;

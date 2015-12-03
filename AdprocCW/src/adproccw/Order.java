@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 /**
  * An order, contains a pipe and a quantity
  * 
- * @author UP368574 <up368574@myport.ac.uk>, UP730691 <up730691@myport.ac.uk>
+ * @author UP368574, UP730691
  */
 public class Order {
     
@@ -43,9 +43,11 @@ public class Order {
         if (options.isEmpty())
             options = "None, ";
         
-        s = "Plastic Grade: " + orderPipe.getPipeGrade() + " Diameter: " + orderPipe.getPipeDiameter() +
-                " Length: " + orderPipe.getPipeLength() + " Colours: " + orderPipe.getPipeColours() +
-                " Options: " + options + " Quantity: " + orderQuantity + " Cost: £" + cost ;               
+        s = "Plastic Grade: " + orderPipe.getPipeGrade() + " Diameter: " + 
+                orderPipe.getPipeDiameter() + " Length: " + 
+                orderPipe.getPipeLength() + " Colours: " + 
+                orderPipe.getPipeColours() + " Options: " + options + 
+                " Quantity: " + orderQuantity + " Cost: £" + cost ;               
         return s;
     }
     
@@ -99,4 +101,3 @@ public class Order {
     }
     
 }
-

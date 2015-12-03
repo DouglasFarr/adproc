@@ -5,11 +5,12 @@ package adproccw;
  * The abstract pipe object
  * Superclass for all other Pipes
  * 
- * @author UP368574 <up368574@myport.ac.uk>, UP730691 <up730691@myport.ac.uk>
+ * @author UP368574, UP730691
  */
 public abstract class Pipe {
     
-    private final double pipeLength; //in meters, volume calculations are in inches;
+    private final double pipeLength; 
+        //in meters, volume calculations are in inches;
     //1 inch = 0.0254 meters
     //1 meter = 39.37 inches
     private final double pipeRadius; //in inches
@@ -134,7 +135,4 @@ public abstract class Pipe {
         calcPrice();
         return pipePrice;
     }
-   
-    
-    
 }

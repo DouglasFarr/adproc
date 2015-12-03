@@ -4,7 +4,7 @@ package adproccw;
 /**
  *
  * 
- * @author UP368574 <up368574@myport.ac.uk>, UP730691 <up730691@myport.ac.uk>
+ * @author UP368574, UP730691
  */
 public class Main {
 
@@ -15,9 +15,6 @@ public class Main {
 
         PipeUI form = new PipeUI();
        
-        form.setVisible(true);
-                
+        form.setVisible(true);        
     }
-   
-    
 }
